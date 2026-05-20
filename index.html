@@ -470,6 +470,22 @@
       border-radius: 100px;
     }
 
+    .shipping-note {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 18px;
+      letter-spacing: 0.3px;
+    }
+
+    .shipping-note svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
     .product-footer {
       display: flex;
       align-items: center;
@@ -543,7 +559,7 @@
 
     .why-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 40px;
     }
 
@@ -581,6 +597,61 @@
       font-size: 14px;
       line-height: 1.7;
       color: rgba(255,255,255,0.45);
+    }
+
+    /* ─── SHIPPING PROCESS ─── */
+    .shipping-section {
+      padding: 100px 40px;
+      background: var(--warm-white);
+    }
+
+    .shipping-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .process-steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .process-step {
+      text-align: center;
+      padding: 0 28px;
+      flex: 1;
+      max-width: 260px;
+    }
+
+    .step-number {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--stone);
+      margin-bottom: 16px;
+    }
+
+    .process-step h4 {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+
+    .process-step p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .process-connector {
+      width: 40px;
+      height: 1px;
+      background: var(--sand);
+      margin-top: 24px;
+      flex-shrink: 0;
     }
 
     /* ─── DISCLAIMER ─── */
@@ -740,6 +811,10 @@
 
       .disclaimer-section { padding: 60px 24px; }
 
+      .shipping-section { padding: 60px 24px; }
+      .process-steps { flex-direction: column; align-items: center; gap: 8px; }
+      .process-connector { width: 1px; height: 24px; }
+
       footer { padding: 40px 24px 30px; }
       .footer-top { flex-direction: column; gap: 30px; }
       .footer-links { gap: 40px; }
@@ -884,7 +959,7 @@
       <div class="hero-content">
         <p class="hero-tag">Research-Grade Peptides &middot; Made in the USA</p>
         <h1>Precision <em>peptides</em> for serious research</h1>
-        <p class="hero-sub">Pharmaceutical-grade compounds. Third-party tested at &gt;99% purity. Individually sealed and shipped same day.</p>
+        <p class="hero-sub">Pharmaceutical-grade compounds. Third-party tested at &gt;99% purity. Individually sealed for maximum integrity.</p>
         <a href="#products" class="hero-cta">
           Shop Now
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
@@ -908,12 +983,12 @@
         Made in the USA
       </div>
       <div class="trust-item">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0H6.375a1.125 1.125 0 01-1.125-1.125V14.25m0 0h13.5m-13.5 0V6.375a1.125 1.125 0 011.125-1.125h9.75"/></svg>
-        Same-Day Shipping
-      </div>
-      <div class="trust-item">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
         All Major Cards Accepted
+      </div>
+      <div class="trust-item">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
+        Small-Batch Synthesized to Order
       </div>
     </div>
   </div>
@@ -940,6 +1015,7 @@
             <span class="detail-pill">10mg</span>
             <span class="detail-pill">Purity &gt;99%</span>
           </div>
+          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 10–14 business days</div>
           <div class="product-footer">
             <span class="product-price"><span class="currency">$</span>59</span>
             <a href="#" class="add-to-cart" data-product="bpc-157">
@@ -962,6 +1038,7 @@
             <span class="detail-pill">10mg</span>
             <span class="detail-pill">Purity &gt;99%</span>
           </div>
+          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 10–14 business days</div>
           <div class="product-footer">
             <span class="product-price"><span class="currency">$</span>89</span>
             <a href="#" class="add-to-cart" data-product="glp1-sm">
@@ -985,6 +1062,7 @@
             <span class="detail-pill">20mg</span>
             <span class="detail-pill">Purity &gt;99%</span>
           </div>
+          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 10–14 business days</div>
           <div class="product-footer">
             <span class="product-price"><span class="currency">$</span>119</span>
             <a href="#" class="add-to-cart" data-product="glp2-tz">
@@ -1007,6 +1085,7 @@
             <span class="detail-pill">10mg</span>
             <span class="detail-pill">Purity &gt;99%</span>
           </div>
+          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 10–14 business days</div>
           <div class="product-footer">
             <span class="product-price"><span class="currency">$</span>79</span>
             <a href="#" class="add-to-cart" data-product="glp3-rt-10">
@@ -1030,6 +1109,7 @@
             <span class="detail-pill">20mg</span>
             <span class="detail-pill">Purity &gt;99%</span>
           </div>
+          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 10–14 business days</div>
           <div class="product-footer">
             <span class="product-price"><span class="currency">$</span>139</span>
             <a href="#" class="add-to-cart" data-product="glp3-rt-20">
@@ -1053,6 +1133,7 @@
             <span class="detail-pill">80mg</span>
             <span class="detail-pill">Purity &gt;99%</span>
           </div>
+          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 10–14 business days</div>
           <div class="product-footer">
             <span class="product-price"><span class="currency">$</span>199</span>
             <a href="#" class="add-to-cart" data-product="klow">
@@ -1075,6 +1156,7 @@
             <span class="detail-pill">10mg</span>
             <span class="detail-pill">Purity &gt;99%</span>
           </div>
+          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 10–14 business days</div>
           <div class="product-footer">
             <span class="product-price"><span class="currency">$</span>49</span>
             <a href="#" class="add-to-cart" data-product="ghk-cu">
@@ -1104,13 +1186,6 @@
         </div>
         <div class="why-card fade-up">
           <div class="why-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
-          </div>
-          <h3>Same-Day Dispatch</h3>
-          <p>Orders placed before 2 PM EST ship same day. Climate-controlled packaging protects compound integrity.</p>
-        </div>
-        <div class="why-card fade-up">
-          <div class="why-icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.746 3.746 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
           </div>
           <h3>No Fillers</h3>
@@ -1127,11 +1202,47 @@
     </div>
   </section>
 
+  <!-- SHIPPING PROCESS -->
+  <section class="shipping-section">
+    <div class="shipping-inner fade-up">
+      <div class="section-header">
+        <p class="section-tag">Our Process</p>
+        <h2 style="font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);font-weight:300;color:var(--charcoal);margin-bottom:20px;">Synthesized fresh. Never from&nbsp;shelf&nbsp;stock.</h2>
+        <p style="font-size:15px;line-height:1.8;color:var(--text-secondary);max-width:640px;margin:0 auto 48px;">Every order is synthesized in small batches and undergoes full third-party purity verification before release. We don't ship from sitting inventory — your compound is freshly produced, tested, and sealed specifically for your order. This process takes 10–14 business days. It's not fast, but it's right.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-number">01</div>
+          <h4>Order Placed</h4>
+          <p>Your order enters our production queue and synthesis begins within 24 hours.</p>
+        </div>
+        <div class="process-connector"></div>
+        <div class="process-step">
+          <div class="step-number">02</div>
+          <h4>Synthesis &amp; Purification</h4>
+          <p>Your compound is synthesized fresh and purified to &gt;99% via HPLC in our US facility.</p>
+        </div>
+        <div class="process-connector"></div>
+        <div class="process-step">
+          <div class="step-number">03</div>
+          <h4>QC Testing</h4>
+          <p>Independent third-party lab verifies purity, mass, endotoxins, and sterility before release.</p>
+        </div>
+        <div class="process-connector"></div>
+        <div class="process-step">
+          <div class="step-number">04</div>
+          <h4>Sealed &amp; Shipped</h4>
+          <p>Vacuum-sealed, lyophilized, and dispatched in climate-controlled packaging with tracking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- DISCLAIMER -->
   <section class="disclaimer-section" id="disclaimer">
     <div class="disclaimer-inner fade-up">
       <h3>Research Use Only</h3>
-      <p>All products sold by Amino Labs are intended strictly for in vitro research and laboratory use. They are not approved by the FDA for human or animal consumption and are not intended to diagnose, treat, cure, or prevent any disease. By purchasing from Amino Labs, you agree that these products will only be used for legitimate research purposes. All customers must be at least 18 years of age.</p>
+      <p>All products sold by Amino Labs are intended strictly for in vitro research and laboratory use. They are not approved by the FDA for human or animal consumption and are not intended to diagnose, treat, cure, or prevent any disease. By purchasing from Amino Labs, you agree that these products will only be used for legitimate research purposes. All customers must be at least 21 years of age.</p>
     </div>
   </section>
 
@@ -1251,3 +1362,4 @@
 
 </body>
 </html>
+  
