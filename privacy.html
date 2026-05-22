@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Amino Labs</title>
+  <meta name="description" content="Amino Labs privacy policy. How we collect, use, and protect your information.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f5f0ea;
+      --warm-white: #faf8f5;
+      --sand: #e8e0d4;
+      --stone: #c4b8a8;
+      --charcoal: #1a1a1a;
+      --soft-black: #0d0d0d;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6259;
+      --text-light: #9a9088;
+      --accent: #8b7355;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--warm-white);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(250, 248, 245, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+
+    .logo em {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 26px;
+      color: var(--text-secondary);
+      margin-left: 2px;
+    }
+
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+
+    .nav-back:hover { color: var(--charcoal); }
+    .nav-back svg { width: 16px; height: 16px; }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      padding: 140px 40px 60px;
+      text-align: center;
+      background: var(--cream);
+    }
+
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .page-header p {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    /* ─── CONTENT ─── */
+    .policy-content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 40px 100px;
+    }
+
+    .policy-content h2 {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-top: 48px;
+      margin-bottom: 16px;
+      padding-top: 32px;
+      border-top: 1px solid var(--sand);
+    }
+
+    .policy-content h2:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .policy-content p {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .policy-content strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--soft-black);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 24px;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo em {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 19px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-copy a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
+
+    .footer-copy a:hover { color: white; }
+
+    @media (max-width: 768px) {
+      .nav-inner { padding: 14px 24px; }
+      .page-header { padding: 120px 24px 48px; }
+      .policy-content { padding: 40px 24px 80px; }
+      footer { padding: 30px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">amino <em>labs</em></a>
+      <a href="index.html" class="nav-back">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+        Back to Shop
+      </a>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Privacy Policy</h1>
+    <p>Last updated: May 2026</p>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="policy-content">
+
+    <h2>Introduction</h2>
+    <p>Amino Labs ("we," "us," or "our") is committed to protecting the privacy of our customers and website visitors. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or make a purchase. By using our site, you consent to the practices described in this policy.</p>
+
+    <h2>Information We Collect</h2>
+    <p><strong>Personal Information:</strong> When you place an order, create an account, or contact us, we may collect your name, email address, shipping address, billing address, phone number, and payment information. Payment card details are processed securely through our third-party payment processor (Shopify Payments / Stripe) and are never stored on our servers.</p>
+    <p><strong>Automatically Collected Information:</strong> When you visit our website, we may automatically collect certain information including your IP address, browser type, operating system, referring URLs, pages viewed, and the dates and times of your visits. This information is collected through cookies and similar tracking technologies.</p>
+    <p><strong>Order Information:</strong> We retain records of your purchase history, order status, and correspondence related to your orders for fulfillment and customer service purposes.</p>
+
+    <h2>How We Use Your Information</h2>
+    <p>We use the information we collect to process and fulfill your orders, including shipping and payment processing. We also use your information to communicate with you about your orders, respond to inquiries, and provide customer support. Additionally, we may use your information to improve our website, products, and services, to send you promotional communications (only with your consent, and you may opt out at any time), to detect and prevent fraud, and to comply with legal obligations.</p>
+
+    <h2>Information Sharing</h2>
+    <p>We do not sell, rent, or trade your personal information to third parties. We may share your information with trusted service providers who assist us in operating our website, processing payments, fulfilling orders, and delivering packages. These providers are contractually obligated to keep your information confidential and to use it only for the purposes we specify. We may also disclose your information if required by law, regulation, legal process, or governmental request.</p>
+
+    <h2>Cookies &amp; Tracking</h2>
+    <p>Our website uses cookies and similar technologies to enhance your browsing experience, analyze site traffic, and understand where our visitors are coming from. You can control cookie preferences through your browser settings. Disabling cookies may affect certain features of our website. We may use third-party analytics services such as Google Analytics to help us understand how visitors interact with our site. These services may collect information about your online activities over time and across different websites.</p>
+
+    <h2>Data Security</h2>
+    <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. All transactions are processed through encrypted SSL connections. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+
+    <h2>Data Retention</h2>
+    <p>We retain your personal information for as long as necessary to fulfill the purposes for which it was collected, including to satisfy legal, accounting, or reporting requirements. Order records are retained for a minimum of five years for tax and compliance purposes. You may request deletion of your account and personal data by contacting us, subject to our legal retention obligations.</p>
+
+    <h2>Your Rights</h2>
+    <p>Depending on your location, you may have the right to access the personal information we hold about you, request correction of inaccurate information, request deletion of your personal information, object to or restrict certain processing of your data, and request portability of your data. To exercise any of these rights, please contact us using the information below. We will respond to your request within 30 days.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>Our website and products are not intended for individuals under the age of 21. We do not knowingly collect personal information from anyone under 21 years of age. If we become aware that we have collected personal information from someone under 21, we will take steps to delete that information promptly.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or applicable laws. Any changes will be posted on this page with an updated "Last updated" date. We encourage you to review this policy periodically.</p>
+
+    <h2>Contact Us</h2>
+    <p>If you have any questions about this Privacy Policy or our data practices, please contact us at:</p>
+    <p><strong>Amino Labs</strong><br>
+    Email: privacy@aminolabs.com<br>
+    Website: aminolabs.com</p>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">amino <em>labs</em></div>
+    <p class="footer-copy">&copy; 2026 Amino Labs. All rights reserved. <a href="index.html">Back to Shop</a></p>
+  </footer>
+
+</body>
+</html>
