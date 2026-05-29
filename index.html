@@ -1517,7 +1517,7 @@
           'bacwater':  'https://3q3qjt-xh.myshopify.com/cart/43796195868738:1',
         };
         if (shopifyLinks[product] && shopifyLinks[product] !== '#') {
-          window.location.href = shopifyLinks[product];
+          window.open(shopifyLinks[product], 'aminoCart');
         } else {
           // Temporary feedback while no Shopify store is connected
           btn.innerHTML = `Added ✓`;
