@@ -487,19 +487,52 @@
   </footer>
 
   <script>
-    function subscribeEmail() {
+    const KLAVIYO_PUBLIC_KEY = 'Xq8DT7';
+    const KLAVIYO_LIST_ID = 'UrtrqX';
+
+    async function subscribeEmail() {
       const email = document.getElementById('email').value.trim();
       if (!email || !email.includes('@')) {
         alert('Please enter a valid email address.');
         return;
       }
-      // Send to business email via mailto, or integrate with your email platform
-      const subject = encodeURIComponent('New Subscriber: Amino Labs List');
-      const body = encodeURIComponent('New email subscriber: ' + email + '\nDate: ' + new Date().toISOString());
-      window.open('mailto:aminolabsresearch@gmail.com?subject=' + subject + '&body=' + body, '_blank');
+
+      try {
+        // Subscribe via Klaviyo Client API
+        await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'revision': '2024-10-15'
+          },
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: { email: email }
+                  }
+                }
+              },
+              relationships: {
+                list: {
+                  data: { type: 'list', id: KLAVIYO_LIST_ID }
+                }
+              }
+            }
+          })
+        });
+      } catch (err) {
+        console.error('Subscription error:', err);
+      }
+
+      // Always show success (Klaviyo subscription is fire-and-forget for UX)
       document.getElementById('capture-form-wrap').style.display = 'none';
       document.getElementById('capture-success').style.display = 'block';
     }
+
     document.getElementById('email').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') subscribeEmail();
     });
