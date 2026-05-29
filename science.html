@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amino Labs — Research Standards That Matter</title>
+  <meta name="description" content="Amino Labs sets the standard for research-grade compound purity. Independently verified, GMP-manufactured, made in the USA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f5f0ea;
+      --warm-white: #faf8f5;
+      --sand: #e8e0d4;
+      --stone: #c4b8a8;
+      --charcoal: #1a1a1a;
+      --soft-black: #0d0d0d;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6259;
+      --text-light: #9a9088;
+      --accent: #8b7355;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--warm-white);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(250, 248, 245, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+
+    .logo em {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 26px;
+      color: var(--text-secondary);
+      margin-left: 2px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+    }
+
+    .hero-inner {
+      max-width: 760px;
+    }
+
+    .hero .eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      color: var(--charcoal);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 18px 44px;
+      background: var(--charcoal);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .cta-btn:hover {
+      background: var(--soft-black);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    }
+
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      background: var(--charcoal);
+      padding: 28px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .trust-item svg { width: 18px; height: 18px; color: var(--stone); }
+
+    /* ─── STANDARDS ─── */
+    .standards {
+      padding: 100px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-head .eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-head h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.1;
+    }
+
+    .section-head h2 em { font-style: italic; }
+
+    .standards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+    }
+
+    .standard {
+      padding: 36px;
+      background: white;
+      border: 1px solid var(--sand);
+      border-radius: 16px;
+    }
+
+    .standard-num {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--stone);
+      margin-bottom: 16px;
+    }
+
+    .standard h3 {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .standard p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* ─── PROCESS ─── */
+    .process {
+      background: var(--cream);
+      padding: 100px 40px;
+    }
+
+    .process-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .process-inner > p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ─── EMAIL CAPTURE ─── */
+    .capture {
+      padding: 100px 40px;
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .capture h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+
+    .capture h2 em { font-style: italic; }
+
+    .capture p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+    }
+
+    .capture-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .capture-form input {
+      flex: 1;
+      padding: 16px 20px;
+      border: 1px solid var(--sand);
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 15px;
+      background: white;
+      -webkit-appearance: none;
+    }
+
+    .capture-form input:focus {
+      outline: none;
+      border-color: var(--charcoal);
+    }
+
+    .capture-form button {
+      padding: 16px 32px;
+      background: var(--charcoal);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.3s;
+    }
+
+    .capture-form button:hover { background: var(--soft-black); }
+
+    .capture .fine {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 20px;
+    }
+
+    .capture-success {
+      display: none;
+      padding: 30px;
+      background: white;
+      border: 1px solid var(--sand);
+      border-radius: 16px;
+    }
+
+    .capture-success h3 {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+
+    .capture-success p { font-size: 15px; color: var(--text-secondary); margin: 0; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--soft-black);
+      padding: 50px 40px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 26px;
+      color: white;
+      margin-bottom: 18px;
+    }
+
+    .footer-logo em {
+      font-style: italic;
+      font-weight: 300;
+      font-size: 21px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .footer-disc {
+      font-size: 12px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.4);
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner { padding: 14px 24px; }
+      .hero { padding: 100px 24px 60px; }
+      .trust-bar { gap: 24px; padding: 24px; }
+      .standards { padding: 70px 24px; }
+      .standards-grid { grid-template-columns: 1fr; gap: 20px; }
+      .process { padding: 70px 24px; }
+      .capture { padding: 70px 24px; }
+      .capture-form { flex-direction: column; }
+      .capture-form button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">amino <em>labs</em></a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Research Standards · Made in the USA</p>
+      <h1>The standard for <em>research-grade</em> purity</h1>
+      <p>Amino Labs exists for one reason: to set a higher bar for quality, transparency, and verification in the research compound space. No shortcuts. No guesswork. Just science done right.</p>
+      <a href="#join" class="cta-btn">Learn More</a>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      &gt;99% Purity
+    </div>
+    <div class="trust-item">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/></svg>
+      GMP Manufactured
+    </div>
+    <div class="trust-item">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+      Third-Party Tested
+    </div>
+  </div>
+
+  <!-- STANDARDS -->
+  <section class="standards">
+    <div class="section-head">
+      <p class="eyebrow">Why Amino Labs</p>
+      <h2>Built on science,<br><em>not marketing claims</em></h2>
+    </div>
+    <div class="standards-grid">
+      <div class="standard">
+        <div class="standard-num">01</div>
+        <h3>Independently Verified</h3>
+        <p>Every batch undergoes third-party HPLC and mass spectrometry analysis. Certificates of analysis are available for full transparency — we publish the data, not just the promise.</p>
+      </div>
+      <div class="standard">
+        <div class="standard-num">02</div>
+        <h3>GMP-Certified Facilities</h3>
+        <p>Manufactured in FDA-registered, GMP-certified facilities in the United States. The same standards trusted by the pharmaceutical and research industries.</p>
+      </div>
+      <div class="standard">
+        <div class="standard-num">03</div>
+        <h3>Small-Batch Synthesis</h3>
+        <p>We don't ship from sitting inventory. Each order is freshly synthesized, tested, and sealed — ensuring maximum stability and consistency in every vial.</p>
+      </div>
+      <div class="standard">
+        <div class="standard-num">04</div>
+        <h3>Radical Transparency</h3>
+        <p>No proprietary blends. No hidden fillers. No trace-amount tricks. You know exactly what you're getting, at the concentration stated, every single time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="process-inner">
+      <div class="section-head">
+        <p class="eyebrow">Our Commitment</p>
+        <h2>Quality is <em>not negotiable</em></h2>
+      </div>
+      <p>In a field crowded with overstated claims and underdelivered products, Amino Labs was founded on a simple principle: do it right or don't do it at all. From synthesis to verification to final seal, every step is held to a standard most never reach. That's the difference between a product you hope works and one you can trust.</p>
+    </div>
+  </section>
+
+  <!-- EMAIL CAPTURE -->
+  <section class="capture" id="join">
+    <div id="capture-form-wrap">
+      <h2>Join the <em>Amino Labs</em> list</h2>
+      <p>Be the first to know about new research, quality reports, and updates from the lab. Subscribers get early access and exclusive offers.</p>
+      <div class="capture-form">
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <button onclick="subscribeEmail()">Subscribe</button>
+      </div>
+      <p class="fine">By subscribing you confirm you are 21+ and agree to receive emails from Amino Labs. Unsubscribe anytime.</p>
+    </div>
+    <div class="capture-success" id="capture-success">
+      <h3>You're on the list.</h3>
+      <p>Thanks for joining. Keep an eye on your inbox — we'll be in touch soon.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">amino <em>labs</em></div>
+    <p class="footer-disc">Amino Labs products are intended for laboratory and research use only. Not for human consumption. Not evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease. You must be 21 years of age or older to purchase.</p>
+    <p class="footer-copy">&copy; 2026 Amino Labs. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function subscribeEmail() {
+      const email = document.getElementById('email').value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      // Send to business email via mailto, or integrate with your email platform
+      const subject = encodeURIComponent('New Subscriber: Amino Labs List');
+      const body = encodeURIComponent('New email subscriber: ' + email + '\nDate: ' + new Date().toISOString());
+      window.open('mailto:aminolabsresearch@gmail.com?subject=' + subject + '&body=' + body, '_blank');
+      document.getElementById('capture-form-wrap').style.display = 'none';
+      document.getElementById('capture-success').style.display = 'block';
+    }
+    document.getElementById('email').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') subscribeEmail();
+    });
+  </script>
+
+</body>
+</html>
