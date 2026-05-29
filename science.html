@@ -400,10 +400,21 @@
     <div class="hero-inner">
       <p class="eyebrow">Research Standards · Made in the USA</p>
       <h1>The standard for <em>research-grade</em> purity</h1>
-      <p>Amino Labs exists for one reason: to set a higher bar for quality, transparency, and verification in the research compound space. No shortcuts. No guesswork. Just science done right.</p>
-      <a href="#join" class="cta-btn">Learn More</a>
+      <p>Independently verified. GMP-manufactured. Made in the USA. Join the list for early access, quality reports, and exclusive offers from the lab.</p>
+      <div id="hero-form-wrap" style="max-width:480px;margin:0 auto;">
+        <div class="capture-form">
+          <input type="email" id="email" placeholder="Enter your email" required>
+          <button onclick="subscribeEmail()">Get Access</button>
+        </div>
+        <p class="fine" style="margin-top:16px;">By subscribing you confirm you are 21+ and agree to receive emails from Amino Labs. Unsubscribe anytime.</p>
+      </div>
+      <div id="hero-success" style="display:none;max-width:480px;margin:0 auto;padding:24px;background:white;border:1px solid var(--sand);border-radius:16px;">
+        <h3 style="font-family:var(--serif);font-size:24px;font-weight:400;color:var(--charcoal);margin-bottom:8px;">You're on the list.</h3>
+        <p style="font-size:15px;color:var(--text-secondary);margin:0;">Thanks for joining. Keep an eye on your inbox — we'll be in touch soon.</p>
+      </div>
     </div>
   </section>
+<!--HERO_END-->
 
   <!-- TRUST BAR -->
   <div class="trust-bar">
@@ -468,8 +479,8 @@
       <h2>Join the <em>Amino Labs</em> list</h2>
       <p>Be the first to know about new research, quality reports, and updates from the lab. Subscribers get early access and exclusive offers.</p>
       <div class="capture-form">
-        <input type="email" id="email" placeholder="Enter your email" required>
-        <button onclick="subscribeEmail()">Subscribe</button>
+        <input type="email" id="email-bottom" placeholder="Enter your email" required>
+        <button onclick="subscribeEmailBottom()">Subscribe</button>
       </div>
       <p class="fine">By subscribing you confirm you are 21+ and agree to receive emails from Amino Labs. Unsubscribe anytime.</p>
     </div>
@@ -490,15 +501,8 @@
     const KLAVIYO_PUBLIC_KEY = 'Xq8DT7';
     const KLAVIYO_LIST_ID = 'UrtrqX';
 
-    async function subscribeEmail() {
-      const email = document.getElementById('email').value.trim();
-      if (!email || !email.includes('@')) {
-        alert('Please enter a valid email address.');
-        return;
-      }
-
+    async function sendToKlaviyo(email) {
       try {
-        // Subscribe via Klaviyo Client API
         await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
           method: 'POST',
           headers: {
@@ -527,14 +531,35 @@
       } catch (err) {
         console.error('Subscription error:', err);
       }
+    }
 
-      // Always show success (Klaviyo subscription is fire-and-forget for UX)
+    async function subscribeEmail() {
+      const email = document.getElementById('email').value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      await sendToKlaviyo(email);
+      document.getElementById('hero-form-wrap').style.display = 'none';
+      document.getElementById('hero-success').style.display = 'block';
+    }
+
+    async function subscribeEmailBottom() {
+      const email = document.getElementById('email-bottom').value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      await sendToKlaviyo(email);
       document.getElementById('capture-form-wrap').style.display = 'none';
       document.getElementById('capture-success').style.display = 'block';
     }
 
     document.getElementById('email').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') subscribeEmail();
+    });
+    document.getElementById('email-bottom').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') subscribeEmailBottom();
     });
   </script>
 
