@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Protocol — Amino Labs</title>
+  <meta name="description" content="Answer a few questions and get a personalized research protocol recommendation from Amino Labs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --cream: #f5f0ea;
+      --warm-white: #faf8f5;
+      --sand: #e8e0d4;
+      --stone: #c4b8a8;
+      --charcoal: #1a1a1a;
+      --soft-black: #0d0d0d;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6259;
+      --text-light: #9a9088;
+      --accent: #8b7355;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--charcoal); color: white; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(26,26,26,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { max-width: 1400px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: center; }
+    .logo { font-family: var(--serif); font-size: 32px; font-weight: 400; letter-spacing: -0.5px; color: white; text-decoration: none; }
+    .logo em { font-style: italic; font-weight: 300; font-size: 26px; color: var(--stone); margin-left: 2px; }
+
+    /* QUIZ CONTAINER */
+    .quiz-wrap { max-width: 640px; margin: 0 auto; padding: 120px 24px 60px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+
+    /* PROGRESS */
+    .progress { margin-bottom: 48px; }
+    .progress-bar { height: 3px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--stone); border-radius: 3px; transition: width 0.5s ease; }
+    .progress-text { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-top: 12px; }
+
+    /* QUESTION */
+    .question { display: none; }
+    .question.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    .question h2 { font-family: var(--serif); font-size: clamp(28px, 5vw, 40px); font-weight: 300; line-height: 1.2; margin-bottom: 12px; }
+    .question h2 em { font-style: italic; color: var(--stone); }
+    .question > p { font-size: 15px; color: rgba(255,255,255,0.45); margin-bottom: 32px; line-height: 1.6; }
+
+    /* OPTIONS */
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .option {
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .option:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+    .option.selected { background: rgba(139,115,85,0.15); border-color: var(--accent); }
+    .option-icon { font-size: 24px; width: 40px; text-align: center; flex-shrink: 0; }
+    .option-text h4 { font-size: 16px; font-weight: 500; color: white; margin-bottom: 2px; }
+    .option-text p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.4; }
+
+    /* EMAIL STEP */
+    .email-step { display: none; animation: fadeIn 0.4s ease; }
+    .email-step.active { display: block; }
+    .email-step h2 { font-family: var(--serif); font-size: clamp(28px, 5vw, 40px); font-weight: 300; line-height: 1.2; margin-bottom: 12px; }
+    .email-step h2 em { font-style: italic; color: var(--stone); }
+    .email-step > p { font-size: 15px; color: rgba(255,255,255,0.45); margin-bottom: 32px; line-height: 1.6; }
+    .email-input { width: 100%; padding: 18px 24px; border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; font-family: var(--sans); font-size: 16px; background: rgba(255,255,255,0.06); color: white; -webkit-appearance: none; margin-bottom: 16px; }
+    .email-input::placeholder { color: rgba(255,255,255,0.3); }
+    .email-input:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.1); }
+    .submit-btn { width: 100%; padding: 18px; background: white; color: var(--charcoal); border: none; border-radius: 100px; font-family: var(--sans); font-size: 15px; font-weight: 500; letter-spacing: 0.5px; cursor: pointer; transition: all 0.3s; }
+    .submit-btn:hover { background: var(--cream); transform: translateY(-1px); }
+    .email-fine { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 16px; text-align: center; }
+
+    /* RESULTS */
+    .results { display: none; padding: 120px 24px 60px; max-width: 700px; margin: 0 auto; }
+    .results.active { display: block; animation: fadeIn 0.5s ease; }
+    .results-header { text-align: center; margin-bottom: 48px; }
+    .results-header .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .results-header h2 { font-family: var(--serif); font-size: clamp(30px, 5vw, 44px); font-weight: 300; margin-bottom: 14px; }
+    .results-header h2 em { font-style: italic; color: var(--stone); }
+    .results-header p { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+    .rec-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+    .rec-card .rec-tag { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .rec-card h3 { font-family: var(--serif); font-size: 28px; font-weight: 400; color: white; margin-bottom: 6px; }
+    .rec-card .rec-spec { font-size: 14px; color: var(--stone); margin-bottom: 14px; }
+    .rec-card p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+    .rec-card .rec-btn { display: inline-block; padding: 12px 28px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; color: white; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s; }
+    .rec-card .rec-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
+
+    .results-footer { text-align: center; margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .results-footer p { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+    .results-footer a { display: inline-block; padding: 16px 40px; background: white; color: var(--charcoal); border-radius: 100px; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s; }
+    .results-footer a:hover { background: var(--cream); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer { background: var(--soft-black); padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-disc { font-size: 11px; line-height: 1.7; color: rgba(255,255,255,0.3); max-width: 600px; margin: 0 auto; }
+
+    @media (max-width: 768px) {
+      .nav-inner { padding: 14px 24px; }
+      .quiz-wrap { padding: 100px 20px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">amino <em>labs</em></a>
+    </div>
+  </nav>
+
+  <!-- QUIZ -->
+  <div class="quiz-wrap" id="quiz-wrap">
+
+    <div class="progress">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 25%"></div></div>
+      <p class="progress-text" id="progress-text">Question 1 of 4</p>
+    </div>
+
+    <!-- Q1: Research Goal -->
+    <div class="question active" id="q1">
+      <h2>What's your primary <em>research focus?</em></h2>
+      <p>Select the area that best describes what you're looking to explore.</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(1, 'weight')">
+          <div class="option-icon">⚖️</div>
+          <div class="option-text">
+            <h4>Body Composition & Metabolic Research</h4>
+            <p>Weight management, metabolic function, glucose regulation</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(1, 'recovery')">
+          <div class="option-icon">🔬</div>
+          <div class="option-text">
+            <h4>Tissue Repair & Recovery</h4>
+            <p>Healing, gut health, joint and connective tissue research</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(1, 'cognitive')">
+          <div class="option-icon">🧠</div>
+          <div class="option-text">
+            <h4>Cognitive Performance & Neuroprotection</h4>
+            <p>Focus, memory, stress resilience, brain health</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(1, 'skin')">
+          <div class="option-icon">✨</div>
+          <div class="option-text">
+            <h4>Skin, Hair & Dermal Biology</h4>
+            <p>Collagen, pigmentation, hair density, anti-aging</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(1, 'longevity')">
+          <div class="option-icon">🧬</div>
+          <div class="option-text">
+            <h4>Longevity & Cellular Aging</h4>
+            <p>Mitochondrial function, DNA repair, NAD+ pathways</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2: Experience -->
+    <div class="question" id="q2">
+      <h2>How much experience do you have with <em>research compounds?</em></h2>
+      <p>This helps us calibrate the right starting point for you.</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(2, 'beginner')">
+          <div class="option-icon">🌱</div>
+          <div class="option-text">
+            <h4>Brand New</h4>
+            <p>I'm just starting to learn about peptide research</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(2, 'intermediate')">
+          <div class="option-icon">📊</div>
+          <div class="option-text">
+            <h4>Some Experience</h4>
+            <p>I've done basic research and understand reconstitution</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(2, 'advanced')">
+          <div class="option-icon">🔬</div>
+          <div class="option-text">
+            <h4>Advanced Researcher</h4>
+            <p>I have significant experience with multiple compounds</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3: Priority -->
+    <div class="question" id="q3">
+      <h2>What matters most in a <em>research supplier?</em></h2>
+      <p>Choose the factor that's most important to you.</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(3, 'purity')">
+          <div class="option-icon">🏅</div>
+          <div class="option-text">
+            <h4>Purity & Verification</h4>
+            <p>Third-party testing, COAs, and >99% purity standards</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(3, 'value')">
+          <div class="option-icon">💎</div>
+          <div class="option-text">
+            <h4>Value & Quality Balance</h4>
+            <p>Research-grade quality without paying pharma prices</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(3, 'guidance')">
+          <div class="option-icon">📋</div>
+          <div class="option-text">
+            <h4>Guidance & Protocol Support</h4>
+            <p>Clear documentation, reconstitution guides, and support</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4: Budget -->
+    <div class="question" id="q4">
+      <h2>What's your monthly <em>research budget?</em></h2>
+      <p>This helps us recommend the right compounds and quantities.</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(4, 'under100')">
+          <div class="option-icon">$</div>
+          <div class="option-text">
+            <h4>Under $100/month</h4>
+            <p>Starting with a focused single-compound protocol</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(4, '100to200')">
+          <div class="option-icon">$$</div>
+          <div class="option-text">
+            <h4>$100 – $200/month</h4>
+            <p>Room for a primary compound plus support compounds</p>
+          </div>
+        </div>
+        <div class="option" onclick="selectOption(4, 'over200')">
+          <div class="option-icon">$$$</div>
+          <div class="option-text">
+            <h4>$200+/month</h4>
+            <p>Full multi-compound research protocol</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL STEP -->
+    <div class="email-step" id="email-step">
+      <h2>Your protocol is <em>ready.</em></h2>
+      <p>Enter your email to see your personalized recommendations and get protocol guides delivered to your inbox.</p>
+      <input type="email" class="email-input" id="quiz-email" placeholder="Enter your email" required>
+      <button class="submit-btn" onclick="submitQuiz()">See My Protocol</button>
+      <p class="email-fine">Free. No spam. Unsubscribe anytime. Must be 21+.</p>
+    </div>
+
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="results-header">
+      <p class="eyebrow">Your Personalized Protocol</p>
+      <h2>Recommended for <em>your research</em></h2>
+      <p>Based on your answers, here are the compounds best suited to your research focus, experience level, and budget.</p>
+    </div>
+    <div id="recommendations"></div>
+    <div class="results-footer">
+      <p>All compounds are >99% purity, third-party verified, and ship in 4–6 business days.</p>
+      <a href="https://aminolabsresearch.com">Browse the Full Catalog</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-disc">Amino Labs products are intended for laboratory and research use only. Not for human consumption. Not evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease. You must be 21 years of age or older to purchase. The information provided here is for educational purposes only and does not constitute medical advice.</p>
+  </footer>
+
+  <script>
+    const KLAVIYO_PUBLIC_KEY = 'Xq8DT7';
+    const KLAVIYO_LIST_ID = 'UrtrqX';
+
+    const answers = {};
+    let currentQ = 1;
+    const totalQ = 4;
+
+    // Product database
+    const products = {
+      'bpc157': {
+        name: 'BPC-157',
+        spec: '10mg · >99% Purity',
+        price: '$65',
+        tag: 'Core Compound',
+        desc: 'BPC-157 is a pentadecapeptide derived from human gastric juice. It is one of the most extensively studied compounds in tissue repair research, with investigations spanning gut mucosal healing, tendon and ligament recovery, and inflammatory response modulation. A foundational compound for recovery-focused protocols.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['recovery']
+      },
+      'glp1': {
+        name: 'GLP-1 (SM) — Semaglutide',
+        spec: '10mg · >99% Purity',
+        price: '$79',
+        tag: 'Popular Choice',
+        desc: 'A GLP-1 receptor agonist that has become one of the most studied compounds in metabolic research. Investigations focus on appetite regulation, glucose homeostasis, and body composition changes. The most accessible entry point for metabolic research.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['weight']
+      },
+      'glp2': {
+        name: 'GLP-2 (TZ) — Tirzepatide',
+        spec: '20mg · >99% Purity',
+        price: '$109',
+        tag: 'Dual-Action',
+        desc: 'A dual GIP/GLP-1 receptor agonist studied for its effects on metabolic function, insulin sensitivity, and body composition. Research suggests dual-agonist compounds may offer advantages over single-receptor approaches. A higher-dose option for advanced metabolic protocols.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['weight']
+      },
+      'glp3': {
+        name: 'GLP-3 (RT) — Retatrutide',
+        spec: '10mg / 20mg · >99% Purity',
+        price: 'From $109',
+        tag: 'Triple-Action',
+        desc: 'A triple-agonist (GIP/GLP-1/glucagon) representing the cutting edge of metabolic research. Early investigations suggest potential advantages in both body composition and energy metabolism. For researchers ready to explore next-generation compounds.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['weight']
+      },
+      'klow': {
+        name: 'KLOW',
+        spec: '80mg · Proprietary Blend',
+        price: '$159',
+        tag: 'Advanced',
+        desc: 'A proprietary high-concentration research blend formulated for metabolic and body composition research. Designed for researchers seeking a comprehensive approach without managing multiple individual compounds.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['weight']
+      },
+      'ghkcu': {
+        name: 'GHK-Cu',
+        spec: '100mg · >99% Purity',
+        price: '$69',
+        tag: 'Bestseller',
+        desc: 'GHK-Cu (copper peptide) is one of the most well-documented peptides in dermal biology. Research spans collagen synthesis, wound healing, skin elasticity, hair follicle stimulation, and anti-inflammatory signaling. A versatile compound for skin and longevity research.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['skin', 'longevity']
+      },
+      'glow': {
+        name: 'GLOW',
+        spec: '70mg · Proprietary Blend',
+        price: '$139',
+        tag: 'Skin Protocol',
+        desc: 'A proprietary dermal research blend combining multiple peptide actives targeted at collagen production, skin barrier function, and cellular turnover. For researchers seeking a multi-pathway approach to skin biology.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['skin']
+      },
+      'melanotan2': {
+        name: 'Melanotan 2',
+        spec: '10mg · >99% Purity',
+        price: '$55',
+        tag: 'Pigmentation Research',
+        desc: 'A synthetic analog of alpha-melanocyte-stimulating hormone (α-MSH) studied for its effects on melanogenesis and pigmentation pathways. One of the most referenced compounds in dermal pigmentation research.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['skin']
+      },
+      'selank': {
+        name: 'Selank',
+        spec: '10mg · >99% Purity',
+        price: '$55',
+        tag: 'Nootropic',
+        desc: 'A synthetic heptapeptide studied for its anxiolytic and nootropic properties. Research has examined effects on GABA modulation, BDNF expression, serotonin metabolism, and cognitive enhancement — without the sedative effects of traditional anxiolytic compounds.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['cognitive']
+      },
+      'semax': {
+        name: 'Semax',
+        spec: '10mg · >99% Purity',
+        price: '$99',
+        tag: 'Neuroprotection',
+        desc: 'Derived from ACTH(4-10), Semax is studied for neuroprotective and neurostimulatory effects. Research examines BDNF/NGF expression, cerebral blood flow, attention regulation, and memory formation. One of the most referenced peptides in nootropic research.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['cognitive']
+      },
+      'motsc': {
+        name: 'MOTS-C',
+        spec: '20mg · >99% Purity',
+        price: '$129',
+        tag: 'Mitochondrial',
+        desc: 'A mitochondrial-derived peptide that has emerged as a key regulator of metabolic homeostasis. Studies examine its role in AMPK activation, exercise performance, insulin sensitivity, and age-related metabolic decline. A bridge between metabolic and longevity research.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['longevity', 'weight']
+      },
+      'nad': {
+        name: 'NAD+',
+        spec: '100mg · >99% Purity',
+        price: '$89',
+        tag: 'Longevity',
+        desc: 'The critical coenzyme involved in energy metabolism, DNA repair, and sirtuin activation. Age-related NAD+ decline is one of the most actively studied phenomena in longevity science. A cornerstone compound for any cellular aging research protocol.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['longevity']
+      },
+      'bacwater': {
+        name: 'Bac H₂O',
+        spec: '3ml · Sterile',
+        price: '$10',
+        tag: 'Essential Supply',
+        desc: 'Bacteriostatic water with 0.9% benzyl alcohol — the standard diluent for reconstituting lyophilized research compounds. Required for any peptide protocol.',
+        url: 'https://aminolabsresearch.com',
+        categories: ['accessory']
+      }
+    };
+
+    // Recommendation engine
+    function getRecommendations() {
+      const goal = answers[1];
+      const experience = answers[2];
+      const budget = answers[4];
+      let recs = [];
+
+      if (goal === 'weight') {
+        if (budget === 'under100') {
+          recs = ['glp1', 'bacwater'];
+        } else if (budget === '100to200') {
+          recs = ['glp1', 'glp2', 'bacwater'];
+        } else {
+          recs = ['glp3', 'klow', 'motsc', 'bacwater'];
+        }
+      } else if (goal === 'recovery') {
+        if (budget === 'under100') {
+          recs = ['bpc157', 'bacwater'];
+        } else if (budget === '100to200') {
+          recs = ['bpc157', 'ghkcu', 'bacwater'];
+        } else {
+          recs = ['bpc157', 'ghkcu', 'nad', 'bacwater'];
+        }
+      } else if (goal === 'cognitive') {
+        if (budget === 'under100') {
+          recs = ['selank', 'bacwater'];
+        } else if (budget === '100to200') {
+          recs = ['selank', 'semax', 'bacwater'];
+        } else {
+          recs = ['selank', 'semax', 'nad', 'motsc', 'bacwater'];
+        }
+      } else if (goal === 'skin') {
+        if (budget === 'under100') {
+          recs = ['ghkcu', 'bacwater'];
+        } else if (budget === '100to200') {
+          recs = ['ghkcu', 'glow', 'bacwater'];
+        } else {
+          recs = ['ghkcu', 'glow', 'melanotan2', 'bacwater'];
+        }
+      } else if (goal === 'longevity') {
+        if (budget === 'under100') {
+          recs = ['nad', 'bacwater'];
+        } else {
+          recs = ['nad', 'motsc', 'ghkcu', 'bacwater'];
+        }
+      }
+
+      return recs;
+    }
+
+    function selectOption(question, value) {
+      answers[question] = value;
+
+      // Highlight selected
+      const qEl = document.getElementById('q' + question);
+      qEl.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+
+      // Auto-advance after brief delay
+      setTimeout(() => {
+        if (question < totalQ) {
+          qEl.classList.remove('active');
+          document.getElementById('q' + (question + 1)).classList.add('active');
+          currentQ = question + 1;
+          document.getElementById('progress-fill').style.width = ((currentQ) / (totalQ + 1) * 100) + '%';
+          document.getElementById('progress-text').textContent = 'Question ' + currentQ + ' of ' + totalQ;
+        } else {
+          // Show email step
+          qEl.classList.remove('active');
+          document.getElementById('email-step').classList.add('active');
+          document.getElementById('progress-fill').style.width = '90%';
+          document.getElementById('progress-text').textContent = 'Almost done';
+        }
+      }, 300);
+    }
+
+    async function submitQuiz() {
+      const email = document.getElementById('quiz-email').value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      // Send to Klaviyo with custom properties
+      try {
+        await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'revision': '2024-10-15' },
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                custom_source: 'protocol_quiz',
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: {
+                      email: email,
+                      properties: {
+                        'Quiz - Research Focus': answers[1] || '',
+                        'Quiz - Experience': answers[2] || '',
+                        'Quiz - Priority': answers[3] || '',
+                        'Quiz - Budget': answers[4] || ''
+                      }
+                    }
+                  }
+                }
+              },
+              relationships: {
+                list: { data: { type: 'list', id: KLAVIYO_LIST_ID } }
+              }
+            }
+          })
+        });
+      } catch (err) { console.error('Klaviyo error:', err); }
+
+      // Build results
+      const recs = getRecommendations();
+      const recsEl = document.getElementById('recommendations');
+      recsEl.innerHTML = '';
+
+      recs.forEach(key => {
+        const p = products[key];
+        recsEl.innerHTML += `
+          <div class="rec-card">
+            <p class="rec-tag">${p.tag}</p>
+            <h3>${p.name}</h3>
+            <p class="rec-spec">${p.spec} · ${p.price}</p>
+            <p>${p.desc}</p>
+            <a href="${p.url}" class="rec-btn" target="_blank">View Product →</a>
+          </div>
+        `;
+      });
+
+      // Show results, hide quiz
+      document.getElementById('quiz-wrap').style.display = 'none';
+      document.getElementById('results').classList.add('active');
+      document.getElementById('progress-fill').style.width = '100%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('quiz-email').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') submitQuiz();
+    });
+  </script>
+
+</body>
+</html>
