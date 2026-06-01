@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Protocols — Amino Labs</title>
+  <meta name="description" content="Free research protocol guides from Amino Labs. Reconstitution, storage, handling, and documentation standards for research-grade compounds.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --cream: #f5f0ea;
+      --warm-white: #faf8f5;
+      --sand: #e8e0d4;
+      --stone: #c4b8a8;
+      --charcoal: #1a1a1a;
+      --soft-black: #0d0d0d;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6259;
+      --text-light: #9a9088;
+      --accent: #8b7355;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--warm-white); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(250,248,245,0.98); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .nav-inner { max-width: 1400px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: center; }
+    .logo { font-family: var(--serif); font-size: 32px; font-weight: 400; letter-spacing: -0.5px; color: var(--charcoal); text-decoration: none; }
+    .logo em { font-style: italic; font-weight: 300; font-size: 26px; color: var(--text-secondary); margin-left: 2px; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 40px 80px; background: var(--charcoal); color: white; }
+    .hero-inner { max-width: 720px; }
+    .hero .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 24px; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(38px, 6vw, 64px); font-weight: 300; line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; color: var(--stone); }
+    .hero > .hero-inner > p { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 540px; margin: 0 auto 36px; }
+    .hero .capture-form { display: flex; gap: 12px; max-width: 460px; margin: 0 auto; }
+    .hero .capture-form input { flex: 1; padding: 16px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; font-family: var(--sans); font-size: 15px; background: rgba(255,255,255,0.08); color: white; -webkit-appearance: none; }
+    .hero .capture-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .hero .capture-form input:focus { outline: none; border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.12); }
+    .hero .capture-form button { padding: 16px 28px; background: white; color: var(--charcoal); border: none; border-radius: 100px; font-family: var(--sans); font-size: 14px; font-weight: 500; letter-spacing: 0.5px; cursor: pointer; white-space: nowrap; transition: all 0.3s; }
+    .hero .capture-form button:hover { background: var(--cream); transform: translateY(-1px); }
+    .hero .fine { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 16px; }
+    .hero-success { display: none; padding: 24px 32px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; max-width: 460px; margin: 0 auto; }
+    .hero-success h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; color: white; margin-bottom: 8px; }
+    .hero-success p { font-size: 14px; color: rgba(255,255,255,0.55); margin: 0; }
+
+    /* WHAT YOU GET */
+    .preview { padding: 80px 40px; max-width: 900px; margin: 0 auto; }
+    .preview .section-head { text-align: center; margin-bottom: 48px; }
+    .preview .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .preview h2 { font-family: var(--serif); font-size: clamp(30px, 4vw, 42px); font-weight: 300; color: var(--charcoal); }
+    .preview h2 em { font-style: italic; }
+    .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .guide-card { padding: 32px; background: white; border: 1px solid var(--sand); border-radius: 16px; transition: transform 0.3s, box-shadow 0.3s; }
+    .guide-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
+    .guide-num { font-family: var(--serif); font-size: 14px; color: var(--stone); margin-bottom: 14px; letter-spacing: 1px; }
+    .guide-card h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; color: var(--charcoal); margin-bottom: 10px; }
+    .guide-card p { font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 16px; }
+    .guide-topics { list-style: none; }
+    .guide-topics li { font-size: 13px; color: var(--text-secondary); padding: 6px 0; border-top: 1px solid var(--cream); display: flex; align-items: center; gap: 8px; }
+    .guide-topics li:first-child { border-top: none; }
+    .guide-topics li svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+
+    /* PROTOCOL CONTENT (visible after signup or for all) */
+    .protocols { padding: 80px 40px; background: var(--cream); }
+    .protocols-inner { max-width: 760px; margin: 0 auto; }
+    .protocol-block { margin-bottom: 56px; }
+    .protocol-block:last-child { margin-bottom: 0; }
+    .protocol-label { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .protocol-block h3 { font-family: var(--serif); font-size: 30px; font-weight: 400; color: var(--charcoal); margin-bottom: 16px; }
+    .protocol-block p { font-size: 15px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 14px; }
+    .step-list { list-style: none; counter-reset: steps; margin: 20px 0; }
+    .step-list li { counter-increment: steps; font-size: 15px; line-height: 1.7; color: var(--text-primary); padding: 14px 0 14px 44px; border-bottom: 1px solid var(--sand); position: relative; }
+    .step-list li::before { content: counter(steps, decimal-leading-zero); position: absolute; left: 0; font-family: var(--serif); font-size: 20px; color: var(--stone); font-weight: 300; }
+    .note-box { background: white; border: 1px solid var(--sand); border-radius: 12px; padding: 20px 24px; margin: 20px 0; font-size: 14px; line-height: 1.7; color: var(--text-secondary); }
+    .note-box strong { color: var(--charcoal); }
+
+    /* MID CTA */
+    .mid-cta { padding: 60px 40px; text-align: center; background: var(--charcoal); color: white; }
+    .mid-cta h2 { font-family: var(--serif); font-size: 32px; font-weight: 300; margin-bottom: 16px; }
+    .mid-cta h2 em { font-style: italic; color: var(--stone); }
+    .mid-cta p { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+    .mid-cta .capture-form { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; }
+    .mid-cta .capture-form input { flex: 1; padding: 14px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; font-family: var(--sans); font-size: 15px; background: rgba(255,255,255,0.08); color: white; -webkit-appearance: none; }
+    .mid-cta .capture-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .mid-cta .capture-form input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
+    .mid-cta .capture-form button { padding: 14px 28px; background: white; color: var(--charcoal); border: none; border-radius: 100px; font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; }
+    .mid-success { display: none; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px; max-width: 440px; margin: 0 auto; }
+    .mid-success p { font-size: 15px; color: rgba(255,255,255,0.7); margin: 0; }
+
+    /* FOOTER */
+    footer { background: var(--soft-black); padding: 50px 40px; text-align: center; }
+    .footer-logo { font-family: var(--serif); font-size: 26px; color: white; margin-bottom: 18px; }
+    .footer-logo em { font-style: italic; font-weight: 300; font-size: 21px; color: rgba(255,255,255,0.5); }
+    .footer-disc { font-size: 12px; line-height: 1.7; color: rgba(255,255,255,0.4); max-width: 600px; margin: 0 auto 16px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+    @media (max-width: 768px) {
+      .nav-inner { padding: 14px 24px; }
+      .hero { padding: 100px 24px 60px; }
+      .hero .capture-form { flex-direction: column; }
+      .hero .capture-form button { width: 100%; }
+      .preview { padding: 60px 24px; }
+      .guide-grid { grid-template-columns: 1fr; }
+      .protocols { padding: 60px 24px; }
+      .mid-cta { padding: 50px 24px; }
+      .mid-cta .capture-form { flex-direction: column; }
+      .mid-cta .capture-form button { width: 100%; }
+      footer { padding: 30px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">amino <em>labs</em></a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Free Research Guides</p>
+      <h1>Research <em>protocols</em> done right</h1>
+      <p>Reconstitution, storage, handling, and documentation — the complete reference for working with research-grade compounds. Free, from the lab.</p>
+      <div id="hero-form-wrap">
+        <div class="capture-form">
+          <input type="email" id="email-hero" placeholder="Enter your email for full access" required>
+          <button onclick="subscribeHero()">Get the Guides</button>
+        </div>
+        <p class="fine">Free. No spam. Unsubscribe anytime. Must be 21+.</p>
+      </div>
+      <div class="hero-success" id="hero-success">
+        <h3>You're in.</h3>
+        <p>Scroll down for the full protocol guides. We'll also send future updates to your inbox.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="preview">
+    <div class="section-head">
+      <p class="eyebrow">What's Inside</p>
+      <h2>Four guides. <em>Zero guesswork.</em></h2>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-num">GUIDE 01</div>
+        <h3>Reconstitution</h3>
+        <p>The step-by-step process for properly reconstituting lyophilized compounds with bacteriostatic water.</p>
+        <ul class="guide-topics">
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Calculating dilution volumes</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Proper injection technique into vial</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Avoiding contamination</li>
+        </ul>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">GUIDE 02</div>
+        <h3>Storage &amp; Stability</h3>
+        <p>How to store compounds pre- and post-reconstitution to maximize shelf life and preserve integrity.</p>
+        <ul class="guide-topics">
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Temperature requirements</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Light sensitivity guidelines</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Shelf life by compound type</li>
+        </ul>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">GUIDE 03</div>
+        <h3>Reading a COA</h3>
+        <p>How to interpret a certificate of analysis — what HPLC purity, mass spec data, and endotoxin levels actually mean.</p>
+        <ul class="guide-topics">
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>HPLC chromatogram basics</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>What ">99% purity" actually means</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Red flags to watch for</li>
+        </ul>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">GUIDE 04</div>
+        <h3>Lab Documentation</h3>
+        <p>Best practices for maintaining proper research records, batch tracking, and experimental documentation.</p>
+        <ul class="guide-topics">
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Research log templates</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Batch and lot tracking</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Proper disposal protocols</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROTOCOL CONTENT -->
+  <section class="protocols">
+    <div class="protocols-inner">
+
+      <div class="protocol-block">
+        <p class="protocol-label">Guide 01</p>
+        <h3>Reconstitution Protocol</h3>
+        <p>Lyophilized (freeze-dried) compounds must be reconstituted with bacteriostatic water before use in research. Proper technique preserves compound integrity and prevents contamination.</p>
+
+        <ol class="step-list">
+          <li>Allow the lyophilized vial and bacteriostatic water to reach room temperature (15–25°C). Do not heat.</li>
+          <li>Swab both vial stoppers with a sterile alcohol prep pad. Allow to air dry completely before proceeding.</li>
+          <li>Using a sterile syringe, draw the desired volume of bacteriostatic water. Standard reconstitution uses 1ml BAC water per vial unless otherwise specified.</li>
+          <li>Insert the needle through the stopper at an angle. Inject the water slowly down the inside wall of the vial — never spray directly onto the lyophilized cake.</li>
+          <li>Allow the compound to dissolve naturally. Gently swirl if needed. Do not shake, vortex, or invert repeatedly — this can denature peptide bonds.</li>
+          <li>Once fully dissolved, the solution should be clear. Any cloudiness, particulate matter, or discoloration indicates potential contamination — discard the vial.</li>
+        </ol>
+
+        <div class="note-box">
+          <strong>Dilution calculator:</strong> To determine concentration, divide the total compound mass (mg) by the volume of BAC water added (ml). For example: 10mg reconstituted with 2ml BAC water = 5mg/ml (or 5,000mcg/ml).
+        </div>
+      </div>
+
+      <div class="protocol-block">
+        <p class="protocol-label">Guide 02</p>
+        <h3>Storage &amp; Stability</h3>
+        <p>Proper storage is the single biggest factor in maintaining compound potency over time. Temperature, light, and contamination are the three primary degradation vectors.</p>
+
+        <ol class="step-list">
+          <li><strong>Pre-reconstitution (lyophilized):</strong> Store at -20°C (freezer) for long-term stability. Room temperature is acceptable for short periods during transit. Avoid repeated freeze-thaw cycles.</li>
+          <li><strong>Post-reconstitution:</strong> Refrigerate at 2–8°C (standard refrigerator). Most reconstituted compounds maintain stability for 21–30 days when stored properly.</li>
+          <li><strong>Light protection:</strong> Store vials away from direct light. UV exposure accelerates oxidation in most peptide compounds. Keep in original packaging or wrap in foil.</li>
+          <li><strong>Contamination prevention:</strong> Always use a fresh sterile needle for each withdrawal. Never touch the stopper with ungloved hands. Swab with alcohol before each use.</li>
+          <li><strong>Shelf life reference:</strong> Lyophilized (sealed, -20°C): 24+ months. Reconstituted (2–8°C): 21–30 days. Reconstituted (room temp): not recommended beyond 48 hours.</li>
+        </ol>
+
+        <div class="note-box">
+          <strong>Pro tip:</strong> If you reconstitute more than you'll use within 30 days, consider splitting into smaller aliquots using sterile vials. This minimizes repeated needle punctures through the main stopper and reduces contamination risk.
+        </div>
+      </div>
+
+      <div class="protocol-block">
+        <p class="protocol-label">Guide 03</p>
+        <h3>Reading a Certificate of Analysis</h3>
+        <p>A certificate of analysis (COA) is the single most important quality document for any research compound. If a vendor can't provide one, that's your first red flag.</p>
+
+        <ol class="step-list">
+          <li><strong>HPLC Purity:</strong> High-Performance Liquid Chromatography measures the percentage of the target compound versus impurities. Look for ≥98% minimum; >99% is the gold standard. The chromatogram should show one dominant peak.</li>
+          <li><strong>Mass Spectrometry (MS):</strong> Confirms molecular identity by measuring the compound's mass-to-charge ratio. The observed molecular weight should match the expected value within ±1 Da (dalton).</li>
+          <li><strong>Appearance:</strong> Should match expected form — most lyophilized peptides are a white to off-white powder. Yellow, brown, or wet cakes suggest degradation or manufacturing issues.</li>
+          <li><strong>Endotoxin levels:</strong> Measured in EU/mg (endotoxin units per milligram). Research-grade compounds should have &lt;5 EU/mg. Higher levels indicate bacterial contamination during manufacturing.</li>
+          <li><strong>Batch/lot number:</strong> Every COA should reference a specific batch. If the COA is generic (no lot number), it may not correspond to your actual product — a common tactic among low-quality vendors.</li>
+        </ol>
+
+        <div class="note-box">
+          <strong>Red flags:</strong> No lot number on the COA. Purity below 95%. No mass spec data. COA from a different company than the vendor. COA date more than 12 months old. Any of these should give you pause.
+        </div>
+      </div>
+
+      <div class="protocol-block">
+        <p class="protocol-label">Guide 04</p>
+        <h3>Lab Documentation Standards</h3>
+        <p>Maintaining proper research records isn't just good practice — it's what separates reproducible science from guesswork. Every variable matters.</p>
+
+        <ol class="step-list">
+          <li><strong>Research log entries:</strong> Record the compound name, lot number, reconstitution date, volume of BAC water used, calculated concentration, and storage location for every vial.</li>
+          <li><strong>Batch tracking:</strong> Keep COAs on file organized by lot number. If results vary between batches, the COA comparison is your diagnostic starting point.</li>
+          <li><strong>Environmental conditions:</strong> Note ambient temperature, humidity, and any deviations from protocol during handling. These variables affect compound stability.</li>
+          <li><strong>Usage log:</strong> Track the date, time, and volume of each withdrawal from a reconstituted vial. This helps identify contamination timelines if issues arise.</li>
+          <li><strong>Disposal:</strong> Expired or compromised compounds should be disposed of according to local regulations. Do not pour down drains. Most jurisdictions accept pharmaceutical waste at designated collection points.</li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MID-PAGE CTA -->
+  <section class="mid-cta">
+    <h2>Get updates from <em>the lab</em></h2>
+    <p>New protocols, quality reports, and exclusive offers — delivered to your inbox.</p>
+    <div id="mid-form-wrap">
+      <div class="capture-form">
+        <input type="email" id="email-mid" placeholder="Enter your email" required>
+        <button onclick="subscribeMid()">Subscribe</button>
+      </div>
+    </div>
+    <div class="mid-success" id="mid-success">
+      <p>You're on the list. We'll be in touch.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">amino <em>labs</em></div>
+    <p class="footer-disc">Amino Labs products are intended for laboratory and research use only. Not for human consumption. Not evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease. You must be 21 years of age or older to purchase.</p>
+    <p class="footer-copy">&copy; 2026 Amino Labs. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const KLAVIYO_PUBLIC_KEY = 'Xq8DT7';
+    const KLAVIYO_LIST_ID = 'UrtrqX';
+
+    async function sendToKlaviyo(email) {
+      try {
+        await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_PUBLIC_KEY, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'revision': '2024-10-15' },
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                profile: { data: { type: 'profile', attributes: { email: email } } }
+              },
+              relationships: {
+                list: { data: { type: 'list', id: KLAVIYO_LIST_ID } }
+              }
+            }
+          })
+        });
+      } catch (err) { console.error('Subscription error:', err); }
+    }
+
+    async function subscribeHero() {
+      const email = document.getElementById('email-hero').value.trim();
+      if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+      await sendToKlaviyo(email);
+      document.getElementById('hero-form-wrap').style.display = 'none';
+      document.getElementById('hero-success').style.display = 'block';
+    }
+
+    async function subscribeMid() {
+      const email = document.getElementById('email-mid').value.trim();
+      if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+      await sendToKlaviyo(email);
+      document.getElementById('mid-form-wrap').style.display = 'none';
+      document.getElementById('mid-success').style.display = 'block';
+    }
+
+    document.getElementById('email-hero').addEventListener('keypress', function(e) { if (e.key === 'Enter') subscribeHero(); });
+    document.getElementById('email-mid').addEventListener('keypress', function(e) { if (e.key === 'Enter') subscribeMid(); });
+  </script>
+
+</body>
+</html>
