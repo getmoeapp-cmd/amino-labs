@@ -1,1803 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amino Labs — Research-Grade Peptides</title>
-  <meta name="description" content="Premium research-grade peptides. >99% purity. Made in the USA. For research use only.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --cream: #f5f0ea;
-      --warm-white: #faf8f5;
-      --sand: #e8e0d4;
-      --stone: #c4b8a8;
-      --charcoal: #1a1a1a;
-      --soft-black: #0d0d0d;
-      --text-primary: #1a1a1a;
-      --text-secondary: #6b6259;
-      --text-light: #9a9088;
-      --accent: #8b7355;
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans: 'DM Sans', -apple-system, sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--sans);
-      background: var(--warm-white);
-      color: var(--text-primary);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(250, 248, 245, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      transition: all 0.4s ease;
-    }
-
-    nav.scrolled {
-      background: rgba(250, 248, 245, 0.97);
-      box-shadow: 0 1px 30px rgba(0,0,0,0.06);
-    }
-
-    .nav-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 18px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-family: var(--serif);
-      font-size: 32px;
-      font-weight: 400;
-      letter-spacing: -0.5px;
-      color: var(--charcoal);
-      text-decoration: none;
-    }
-
-    .logo em {
-      font-style: italic;
-      font-weight: 300;
-      font-size: 26px;
-      color: var(--text-secondary);
-      margin-left: 2px;
-    }
-
-    .footer-logo-img {
-      height: 32px;
-      width: auto;
-      object-fit: contain;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover { color: var(--charcoal); }
-
-    .nav-cart {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--charcoal);
-      color: white;
-      padding: 10px 22px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-
-    .nav-cart:hover {
-      background: var(--soft-black);
-      transform: translateY(-1px);
-    }
-
-    .nav-cart svg { width: 16px; height: 16px; }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-    }
-
-    .mobile-menu-btn span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--charcoal);
-      margin: 5px 0;
-      transition: all 0.3s;
-    }
-
-    /* ─── HERO ─── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: var(--cream);
-    }
-
-    .hero-inner {
-      max-width: 1400px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 120px 40px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .hero-image {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-image img {
-      width: 100%;
-      max-width: 580px;
-      height: auto;
-      border-radius: 20px;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-tag {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(42px, 5vw, 72px);
-      font-weight: 300;
-      line-height: 1.05;
-      color: var(--charcoal);
-      max-width: 600px;
-      margin-bottom: 24px;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      font-weight: 300;
-    }
-
-    .hero-sub {
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      max-width: 480px;
-      margin-bottom: 40px;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--charcoal);
-      color: white;
-      padding: 16px 36px;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.4s;
-    }
-
-    .hero-cta:hover {
-      background: var(--soft-black);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-    }
-
-    .hero-cta svg {
-      width: 18px;
-      height: 18px;
-      transition: transform 0.3s;
-    }
-
-    .hero-cta:hover svg { transform: translateX(4px); }
-
-    /* ─── FEATURE BANNER ─── */
-    .feature-banner {
-      background: var(--cream);
-      padding: 100px 40px;
-    }
-
-    .feature-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .feature-image img {
-      width: 100%;
-      max-width: 520px;
-      border-radius: 20px;
-    }
-
-    .feature-content .section-tag {
-      text-align: left;
-      margin-bottom: 16px;
-    }
-
-    .feature-content h2 {
-      font-family: var(--serif);
-      font-size: clamp(28px, 3.5vw, 44px);
-      font-weight: 300;
-      color: var(--charcoal);
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-
-    .feature-content h2 em {
-      font-style: italic;
-    }
-
-    .feature-content p {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-      max-width: 480px;
-    }
-
-    .feature-list {
-      list-style: none;
-      margin-top: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .feature-list li {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--text-primary);
-      font-weight: 400;
-    }
-
-    .feature-list li svg {
-      width: 18px;
-      height: 18px;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    /* ─── TRUST BAR ─── */
-    .trust-bar {
-      background: var(--charcoal);
-      padding: 22px 40px;
-    }
-
-    .trust-bar-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      gap: 60px;
-      flex-wrap: wrap;
-    }
-
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
-      font-weight: 400;
-    }
-
-    .trust-item svg {
-      width: 18px;
-      height: 18px;
-      opacity: 0.5;
-    }
-
-    /* ─── PRODUCTS ─── */
-    .products-section {
-      padding: 100px 40px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 72px;
-    }
-
-    .section-tag {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 16px;
-    }
-
-    .section-header h2 {
-      font-family: var(--serif);
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 300;
-      color: var(--charcoal);
-      line-height: 1.1;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .product-card {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(0,0,0,0.04);
-      transition: all 0.4s ease;
-      position: relative;
-    }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-      border-color: transparent;
-    }
-
-    .product-image {
-      aspect-ratio: 1;
-      background: #f8f6f3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-image img {
-      max-width: 70%;
-      max-height: 85%;
-      object-fit: contain;
-      transition: transform 0.5s ease;
-    }
-
-    .product-card:hover .product-image img {
-      transform: scale(1.05);
-    }
-
-    .product-badge {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      background: var(--charcoal);
-      color: white;
-      padding: 5px 12px;
-      border-radius: 100px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .product-info {
-      padding: 28px;
-    }
-
-    .product-name {
-      font-family: var(--serif);
-      font-size: 24px;
-      font-weight: 400;
-      margin-bottom: 4px;
-    }
-
-    .product-spec {
-      font-size: 13px;
-      color: var(--text-light);
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
-    }
-
-    .product-details {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .detail-pill {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      color: var(--text-secondary);
-      background: var(--cream);
-      padding: 5px 12px;
-      border-radius: 100px;
-    }
-
-    .shipping-note {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-light);
-      margin-bottom: 18px;
-      letter-spacing: 0.3px;
-    }
-
-    .shipping-note svg {
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0;
-    }
-
-    .product-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 20px;
-      border-top: 1px solid rgba(0,0,0,0.06);
-    }
-
-    .product-price {
-      font-size: 26px;
-      font-weight: 500;
-      color: var(--charcoal);
-      letter-spacing: -0.5px;
-    }
-
-    .product-price .currency {
-      font-size: 16px;
-      font-weight: 400;
-      vertical-align: top;
-      margin-right: 1px;
-    }
-
-    .add-to-cart {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--charcoal);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-
-    .add-to-cart:hover {
-      background: var(--soft-black);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    }
-
-    .add-to-cart svg { width: 14px; height: 14px; }
-
-    /* ─── WHY SECTION ─── */
-    .why-section {
-      background: var(--charcoal);
-      padding: 100px 40px;
-      color: white;
-    }
-
-    .why-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .why-section .section-tag { color: rgba(255,255,255,0.35); }
-
-    .why-section h2 {
-      font-family: var(--serif);
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 300;
-      color: white;
-      text-align: center;
-      margin-bottom: 72px;
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-    }
-
-    .why-card {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .why-icon {
-      width: 52px;
-      height: 52px;
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-    }
-
-    .why-icon svg {
-      width: 22px;
-      height: 22px;
-      stroke: rgba(255,255,255,0.6);
-    }
-
-    .why-card h3 {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 400;
-      margin-bottom: 12px;
-      color: white;
-    }
-
-    .why-card p {
-      font-size: 14px;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.45);
-    }
-
-    /* ─── SHIPPING PROCESS ─── */
-    .shipping-section {
-      padding: 100px 40px;
-      background: var(--warm-white);
-    }
-
-    .shipping-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .process-steps {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 0;
-    }
-
-    .process-step {
-      text-align: center;
-      padding: 0 28px;
-      flex: 1;
-      max-width: 260px;
-    }
-
-    .step-number {
-      font-family: var(--serif);
-      font-size: 36px;
-      font-weight: 300;
-      color: var(--stone);
-      margin-bottom: 16px;
-    }
-
-    .process-step h4 {
-      font-family: var(--serif);
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--charcoal);
-      margin-bottom: 10px;
-    }
-
-    .process-step p {
-      font-size: 13px;
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-
-    .process-connector {
-      width: 40px;
-      height: 1px;
-      background: var(--sand);
-      margin-top: 24px;
-      flex-shrink: 0;
-    }
-
-    /* ─── DISCLAIMER ─── */
-    .disclaimer-section {
-      padding: 80px 40px;
-      background: var(--cream);
-    }
-
-    .refund-section {
-      padding: 60px 40px;
-      background: var(--warm-white);
-    }
-
-    .refund-section .disclaimer-inner h3 {
-      font-size: 24px;
-    }
-
-    .disclaimer-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .disclaimer-inner h3 {
-      font-family: var(--serif);
-      font-size: 28px;
-      font-weight: 400;
-      margin-bottom: 20px;
-      color: var(--charcoal);
-    }
-
-    .disclaimer-inner p {
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--text-secondary);
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--soft-black);
-      padding: 60px 40px 40px;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .footer-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding-bottom: 40px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 40px;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 60px;
-    }
-
-    .footer-col h4 {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      margin-bottom: 16px;
-    }
-
-    .footer-col a {
-      display: block;
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      text-decoration: none;
-      margin-bottom: 10px;
-      transition: color 0.3s;
-    }
-
-    .footer-col a:hover { color: white; }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-    }
-
-    .payment-icons {
-      display: flex;
-      gap: 12px;
-    }
-
-    .payment-icon {
-      width: 40px;
-      height: 26px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: rgba(255,255,255,0.4);
-    }
-
-    /* ─── ANIMATIONS ─── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 1024px) {
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 768px) {
-      .nav-inner { padding: 14px 24px; }
-      .nav-links { display: none; }
-      .mobile-menu-btn { display: block; }
-
-      .hero-inner { 
-        grid-template-columns: 1fr; 
-        padding: 100px 24px 40px;
-        gap: 40px;
-        text-align: center;
-      }
-      .hero-inner > .hero-content { order: 1; }
-      .hero-inner > .hero-image { order: 2; }
-      .hero-sub { margin-left: auto; margin-right: auto; font-size: 14px; }
-      .hero-cta { margin: 0 auto; }
-
-      .feature-banner { padding: 60px 24px; }
-      .feature-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-      .feature-image img { max-width: 360px; margin: 0 auto; }
-      .feature-content .section-tag { text-align: center; }
-      .feature-list { align-items: center; }
-
-      .trust-bar { padding: 16px 24px; }
-      .trust-bar-inner { gap: 24px; justify-content: center; }
-      .trust-item { font-size: 10px; letter-spacing: 1px; }
-
-      .products-section { padding: 60px 24px; }
-      .products-grid { grid-template-columns: 1fr; gap: 20px; }
-      .product-image { padding: 30px; }
-      .product-info { padding: 20px; }
-
-      .why-section { padding: 60px 24px; }
-      .why-grid { grid-template-columns: 1fr; gap: 20px; }
-      .why-card { padding: 24px 16px; }
-
-      .disclaimer-section { padding: 60px 24px; }
-
-      .shipping-section { padding: 60px 24px; }
-      .process-steps { flex-direction: column; align-items: center; gap: 8px; }
-      .process-connector { width: 1px; height: 24px; }
-
-      footer { padding: 40px 24px 30px; }
-      .footer-top { flex-direction: column; gap: 30px; }
-      .footer-links { gap: 40px; }
-      .footer-bottom { flex-direction: column; gap: 16px; }
-    }
-
-    @media (max-width: 480px) {
-      .products-grid { grid-template-columns: 1fr; }
-      .product-footer { flex-direction: column; gap: 16px; align-items: flex-start; }
-      .add-to-cart { width: 100%; justify-content: center; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amino Labs — USA-Made Research Peptides</title>
+<meta name="description" content="USA-made research-grade peptides. >99% purity. 7x tested. B2B supplier to medical practices and providers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#f5f0ea;--warm-white:#faf8f5;--sand:#e8e0d4;--stone:#c4b8a8;--charcoal:#1a1a1a;--soft-black:#0d0d0d;--text-primary:#1a1a1a;--text-secondary:#6b6259;--text-light:#9a9088;--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--warm-white);color:var(--text-primary);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(250,248,245,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);transition:.4s}
+nav.scrolled{box-shadow:0 1px 30px rgba(0,0,0,.06)}
+.nav-inner{max-width:1400px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--serif);font-size:32px;font-weight:400;letter-spacing:-.5px;color:var(--charcoal);text-decoration:none}
+.logo em{font-style:italic;font-weight:300;font-size:26px;color:var(--text-secondary);margin-left:2px}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;color:var(--text-secondary);text-decoration:none;transition:color .3s}
+.nav-links a:hover{color:var(--charcoal)}
+.nav-cta{display:inline-flex;align-items:center;gap:6px;background:var(--charcoal);color:#fff!important;padding:10px 22px;border-radius:100px;font-size:12px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;transition:.3s}
+.nav-cta:hover{background:var(--soft-black)}
+.mobile-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.mobile-menu-btn span{display:block;width:22px;height:1.5px;background:var(--charcoal);margin:5px 0}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--cream)}
+.hero-inner{max-width:1400px;width:100%;margin:0 auto;padding:120px 40px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-image{display:flex;justify-content:center}
+.hero-image img{width:100%;max-width:580px;border-radius:20px}
+.hero-tag{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);margin-bottom:20px}
+.hero h1{font-family:var(--serif);font-size:clamp(42px,5vw,72px);font-weight:300;line-height:1.05;color:var(--charcoal);max-width:600px;margin-bottom:24px}
+.hero h1 em{font-style:italic;font-weight:300}
+.hero-sub{font-size:16px;line-height:1.7;color:var(--text-secondary);max-width:480px;margin-bottom:40px}
+.hero-cta{display:inline-flex;align-items:center;gap:12px;background:var(--charcoal);color:#fff;padding:16px 36px;border-radius:100px;font-size:13px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;transition:.4s}
+.hero-cta:hover{background:var(--soft-black);transform:translateY(-2px)}
+.hero-cta svg{width:18px;height:18px}
+.trust-bar{background:var(--charcoal);padding:22px 40px}
+.trust-bar-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:center;gap:60px;flex-wrap:wrap}
+.trust-item{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.products-section{padding:100px 40px;max-width:1400px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:72px}
+.section-tag{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);margin-bottom:16px}
+.section-header h2{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;color:var(--charcoal);line-height:1.1}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.product-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:.4s;position:relative}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.08)}
+.product-image{aspect-ratio:1;background:#f8f6f3;display:flex;align-items:center;justify-content:center;padding:40px;position:relative}
+.product-image img{max-width:70%;max-height:85%;object-fit:contain;transition:.5s}
+.product-card:hover .product-image img{transform:scale(1.05)}
+.product-badge{position:absolute;top:16px;left:16px;background:var(--charcoal);color:#fff;padding:5px 12px;border-radius:100px;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.product-info{padding:28px}
+.product-name{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:4px}
+.product-spec{font-size:13px;color:var(--text-light);letter-spacing:.5px;margin-bottom:16px}
+.product-details{display:flex;gap:16px;margin-bottom:20px}
+.detail-pill{font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--cream);padding:5px 12px;border-radius:100px}
+.shipping-note{font-size:11px;color:var(--text-light)}
+.why-section{background:var(--charcoal);padding:100px 40px;color:#fff}
+.why-inner{max-width:1400px;margin:0 auto}
+.why-section .section-tag{color:rgba(255,255,255,.35)}
+.why-section h2{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;color:#fff;text-align:center;margin-bottom:72px}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.why-card{text-align:center;padding:40px 20px}
+.why-card h3{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:12px;color:#fff}
+.why-card p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.45)}
+.shipping-section{padding:100px 40px;background:var(--warm-white)}
+.shipping-inner{max-width:1400px;margin:0 auto}
+.process-steps{display:flex;align-items:flex-start;justify-content:center}
+.process-step{text-align:center;padding:0 28px;flex:1;max-width:260px}
+.step-number{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--stone);margin-bottom:16px}
+.process-step h4{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--charcoal);margin-bottom:10px}
+.process-step p{font-size:13px;line-height:1.7;color:var(--text-secondary)}
+.process-connector{width:40px;height:1px;background:var(--sand);margin-top:24px}
+.b2b-section{padding:100px 40px;background:var(--cream)}
+.b2b-inner{max-width:720px;margin:0 auto}
+.b2b-form-wrap{background:#fff;border-radius:20px;padding:40px;margin-top:48px;box-shadow:0 10px 40px rgba(0,0,0,.04)}
+.b2b-input{width:100%;padding:14px 16px;border:1px solid #e8e0d4;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;background:#fff;color:#1a1a1a;outline:none}
+.b2b-input:focus{border-color:#1a1a1a}
+.b2b-select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%236b6259' stroke-width='2'><polyline points='1,1 6,6 11,1'/></svg>");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.b2b-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.b2b-radio-card{flex:1;display:flex;align-items:center;gap:8px;padding:12px 16px;background:#fff;border:1.5px solid #e8e0d4;border-radius:8px;cursor:pointer;font-size:14px}
+.b2b-radio-card.selected{border-color:#1a1a1a}
+.disclaimer-section{padding:80px 40px;background:var(--cream)}
+.refund-section{padding:60px 40px;background:var(--warm-white)}
+.refund-section .disclaimer-inner h3{font-size:24px}
+.disclaimer-inner{max-width:800px;margin:0 auto;text-align:center}
+.disclaimer-inner h3{font-family:var(--serif);font-size:28px;font-weight:400;margin-bottom:20px;color:var(--charcoal)}
+.disclaimer-inner p{font-size:14px;line-height:1.8;color:var(--text-secondary)}
+footer{background:var(--soft-black);padding:60px 40px 40px;color:rgba(255,255,255,.4)}
+.footer-inner{max-width:1400px;margin:0 auto}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:40px}
+.footer-logo{font-family:var(--serif);font-size:28px;color:#fff}
+.footer-logo em{font-style:italic;font-weight:300;font-size:22px;color:rgba(255,255,255,.5)}
+.footer-address{font-size:12px;line-height:1.7;color:rgba(255,255,255,.45);margin-top:14px}
+.footer-links{display:flex;gap:60px}
+.footer-col h4{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px}
+.footer-col a{display:block;font-size:14px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:10px}
+.footer-col a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;font-size:12px}
+.fade-up{opacity:0;transform:translateY(30px);transition:.7s cubic-bezier(.22,1,.36,1)}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){.products-grid{grid-template-columns:repeat(2,1fr)}.why-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.nav-inner{padding:14px 24px}.nav-links{display:none}.mobile-menu-btn{display:block}.hero-inner{grid-template-columns:1fr;padding:100px 24px 40px;gap:40px;text-align:center}.hero-inner>.hero-content{order:1}.hero-inner>.hero-image{order:2}.hero-sub{margin:0 auto 40px}.hero-cta{margin:0 auto}.trust-bar{padding:16px 24px}.trust-bar-inner{gap:24px}.products-section{padding:60px 24px}.products-grid{grid-template-columns:1fr;gap:20px}.product-image{padding:30px}.product-info{padding:20px}.why-section{padding:60px 24px}.why-grid{grid-template-columns:1fr}.b2b-section{padding:60px 20px}.b2b-form-wrap{padding:28px 20px}.b2b-row{grid-template-columns:1fr}.disclaimer-section{padding:60px 24px}.shipping-section{padding:60px 24px}.process-steps{flex-direction:column;align-items:center;gap:8px}.process-connector{width:1px;height:24px}footer{padding:40px 24px 30px}.footer-top{flex-direction:column;gap:30px}.footer-links{gap:40px;flex-wrap:wrap}.footer-bottom{flex-direction:column;gap:16px}}
+</style>
 </head>
 <body>
+<div id="age-gate" style="position:fixed;inset:0;z-index:9999;background:rgba(13,13,13,.92);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;transition:opacity .5s">
+<div style="background:#fff;border-radius:20px;padding:56px 48px;max-width:440px;width:90%;text-align:center;box-shadow:0 40px 80px rgba(0,0,0,.3)">
+<div style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#1a1a1a">amino <em style="font-style:italic;font-weight:300;font-size:26px;color:#6b6259">labs</em></div>
+<div style="width:40px;height:1px;background:#c4b8a8;margin:20px auto"></div>
+<h2 style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#1a1a1a;margin-bottom:12px">Age Verification</h2>
+<p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.7;color:#6b6259;margin-bottom:32px">You must be 21+ to enter this site.</p>
+<div style="display:flex;gap:12px;justify-content:center">
+<button onclick="enterSite()" style="font-family:'DM Sans',sans-serif;background:#1a1a1a;color:#fff;border:none;padding:14px 40px;border-radius:100px;font-size:13px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;cursor:pointer">I Am 21+</button>
+<button onclick="exitSite()" style="font-family:'DM Sans',sans-serif;background:transparent;color:#6b6259;border:1px solid #e8e0d4;padding:14px 32px;border-radius:100px;font-size:13px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;cursor:pointer">Exit</button>
+</div></div></div>
+<script>if(sessionStorage.getItem('ageVerified')==='true'){document.getElementById('age-gate').style.display='none'}function enterSite(){sessionStorage.setItem('ageVerified','true');var g=document.getElementById('age-gate');g.style.opacity='0';setTimeout(function(){g.style.display='none'},500)}function exitSite(){window.location.href='https://www.google.com'}</script>
 
-  <!-- AGE GATE -->
-  <div id="age-gate" style="
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: rgba(13, 13, 13, 0.92);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-  ">
-    <div style="
-      background: white;
-      border-radius: 20px;
-      padding: 56px 48px;
-      max-width: 440px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.3);
-    ">
-      <div style="
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: 32px;
-        font-weight: 400;
-        color: #1a1a1a;
-        margin-bottom: 4px;
-      ">amino <em style="font-style:italic;font-weight:300;font-size:26px;color:#6b6259;">labs</em></div>
-      <div style="
-        width: 40px;
-        height: 1px;
-        background: #c4b8a8;
-        margin: 20px auto;
-      "></div>
-      <h2 style="
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: 24px;
-        font-weight: 400;
-        color: #1a1a1a;
-        margin-bottom: 12px;
-      ">Age Verification</h2>
-      <p style="
-        font-family: 'DM Sans', sans-serif;
-        font-size: 14px;
-        line-height: 1.7;
-        color: #6b6259;
-        margin-bottom: 32px;
-      ">You must be 21 years of age or older to enter this site. By clicking "Enter" you confirm that you are at least 21 years old.</p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button onclick="enterSite()" style="
-          font-family: 'DM Sans', sans-serif;
-          background: #1a1a1a;
-          color: white;
-          border: none;
-          padding: 14px 40px;
-          border-radius: 100px;
-          font-size: 13px;
-          font-weight: 500;
-          letter-spacing: 0.8px;
-          text-transform: uppercase;
-          cursor: pointer;
-          transition: all 0.3s;
-        " onmouseover="this.style.background='#0d0d0d';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#1a1a1a';this.style.transform='none'">I Am 21+</button>
-        <button onclick="exitSite()" style="
-          font-family: 'DM Sans', sans-serif;
-          background: transparent;
-          color: #6b6259;
-          border: 1px solid #e8e0d4;
-          padding: 14px 32px;
-          border-radius: 100px;
-          font-size: 13px;
-          font-weight: 500;
-          letter-spacing: 0.8px;
-          text-transform: uppercase;
-          cursor: pointer;
-          transition: all 0.3s;
-        " onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e0d4';this.style.color='#6b6259'">Exit</button>
-      </div>
-    </div>
-  </div>
+<div id="top-banner" style="position:fixed;top:0;left:0;right:0;z-index:1001;background:#1a1a1a;color:#fff;padding:8px 20px;text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:10px">
+<svg width="22" height="14" viewBox="0 0 22 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:1px;flex-shrink:0"><rect width="22" height="14" fill="#B22234"/><rect y="1.077" width="22" height="1.077" fill="#fff"/><rect y="3.231" width="22" height="1.077" fill="#fff"/><rect y="5.385" width="22" height="1.077" fill="#fff"/><rect y="7.538" width="22" height="1.077" fill="#fff"/><rect y="9.692" width="22" height="1.077" fill="#fff"/><rect y="11.846" width="22" height="1.077" fill="#fff"/><rect width="9" height="7.538" fill="#3C3B6E"/></svg>
+USA Made &middot; 7x Tested
+</div>
 
-  <script>
-    // Check if already verified this session
-    if (sessionStorage.getItem('ageVerified') === 'true') {
-      document.getElementById('age-gate').style.display = 'none';
-    }
+<nav id="navbar" style="top:30px!important">
+<div class="nav-inner">
+<a href="#" class="logo">amino <em>labs</em></a>
+<ul class="nav-links">
+<li><a href="#products">Catalog</a></li>
+<li><a href="#why">About</a></li>
+<li><a href="#disclaimer">Research</a></li>
+<li><a href="affiliate.html">Affiliates</a></li>
+<li><a href="#contact-form" class="nav-cta">Contact Us</a></li>
+</ul>
+<button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('show')"><span></span><span></span><span></span></button>
+</div></nav>
 
-    function enterSite() {
-      sessionStorage.setItem('ageVerified', 'true');
-      const gate = document.getElementById('age-gate');
-      gate.style.opacity = '0';
-      setTimeout(() => { gate.style.display = 'none'; }, 500);
-    }
+<section class="hero">
+<div class="hero-inner">
+<div class="hero-content">
+<p class="hero-tag">USA-Made Research Peptides &middot; B2B Supplier</p>
+<h1>Precision <em>peptides</em> for medical practices &amp; research</h1>
+<p class="hero-sub">Pharmaceutical-grade compounds. 7x tested at &gt;99% purity. Supplied directly to licensed providers and research institutions.</p>
+<a href="#contact-form" class="hero-cta">Contact Us<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+</div>
+<div class="hero-image"><img src="images/packaging.jpg" alt="Amino Labs" loading="eager"></div>
+</div></section>
 
-    function exitSite() {
-      window.location.href = 'https://www.google.com';
-    }
-  </script>
+<div class="trust-bar"><div class="trust-bar-inner">
+<div class="trust-item">&gt;99% Purity Verified</div>
+<div class="trust-item">Made in the USA</div>
+<div class="trust-item">Small-Batch Synthesized</div>
+</div></div>
 
-  <!-- NAV -->
-  <!-- SHIPPING BANNER -->
-  <div id="shipping-banner" style="
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1001;
-    background: #1a1a1a;
-    color: white;
-    padding: 8px 20px;
-    text-align: center;
-    font-family: 'DM Sans', -apple-system, sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  ">
-    Free Shipping on Orders Over $200 &middot; Ships in 4–6 Business Days
-  </div>
+<section class="products-section" id="products">
+<div class="section-header fade-up">
+<p class="section-tag">The Catalog</p>
+<h2>Research Peptide Catalog</h2>
+<p style="font-size:14px;line-height:1.7;color:var(--text-secondary);max-width:540px;margin:24px auto 0">Contact us for wholesale pricing and case-quantity ordering.</p>
+</div>
+<div class="products-grid">
+<div class="product-card fade-up"><div class="product-image"><span class="product-badge">Popular</span><img src="images/bpc157.jpg" alt="BPC-157"></div><div class="product-info"><h3 class="product-name">BPC-157</h3><p class="product-spec">Body Protection Compound</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/glp1-sm.jpg" alt="GLP-1"></div><div class="product-info"><h3 class="product-name">GLP-1 (SM)</h3><p class="product-spec">Semaglutide Analog</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><span class="product-badge">New</span><img src="images/glp2-tz.jpg" alt="GLP-2"></div><div class="product-info"><h3 class="product-name">GLP-2 (TZ)</h3><p class="product-spec">Tirzepatide Analog</p><div class="product-details"><span class="detail-pill">20mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/glp3-rt-10mg.jpg" alt="GLP-3 10mg"></div><div class="product-info"><h3 class="product-name">GLP-3 (RT)</h3><p class="product-spec">Retatrutide Analog</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><span class="product-badge">Best Value</span><img src="images/glp3-rt-20mg.jpg" alt="GLP-3 20mg"></div><div class="product-info"><h3 class="product-name">GLP-3 (RT)</h3><p class="product-spec">Retatrutide Analog</p><div class="product-details"><span class="detail-pill">20mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><span class="product-badge">Premium</span><img src="images/klow.jpg" alt="KLOW"></div><div class="product-info"><h3 class="product-name">KLOW</h3><p class="product-spec">Research Compound</p><div class="product-details"><span class="detail-pill">80mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/ghk-cu.jpg" alt="GHK-Cu"></div><div class="product-info"><h3 class="product-name">GHK-Cu</h3><p class="product-spec">Copper Peptide</p><div class="product-details"><span class="detail-pill">100mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><span class="product-badge">New</span><img src="images/glow.jpg" alt="GLOW"></div><div class="product-info"><h3 class="product-name">GLOW</h3><p class="product-spec">Research Compound</p><div class="product-details"><span class="detail-pill">70mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/melanotan2.jpg" alt="MT-2"></div><div class="product-info"><h3 class="product-name">Melanotan 2</h3><p class="product-spec">Tanning Peptide</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><span class="product-badge">New</span><img src="images/motsc.jpg" alt="MOTS-C"></div><div class="product-info"><h3 class="product-name">MOTS-C</h3><p class="product-spec">Mitochondrial Peptide</p><div class="product-details"><span class="detail-pill">20mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/nad.jpg" alt="NAD+"></div><div class="product-info"><h3 class="product-name">NAD+</h3><p class="product-spec">Nicotinamide Adenine Dinucleotide</p><div class="product-details"><span class="detail-pill">100mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/selank.jpg" alt="Selank"></div><div class="product-info"><h3 class="product-name">Selank</h3><p class="product-spec">Nootropic Peptide</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/semax.jpg" alt="Semax"></div><div class="product-info"><h3 class="product-name">Semax</h3><p class="product-spec">Nootropic Peptide</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/bacwater.jpg" alt="Bac Water"></div><div class="product-info"><h3 class="product-name">Bac Water</h3><p class="product-spec">Bacteriostatic Water</p><div class="product-details"><span class="detail-pill">3ml</span><span class="detail-pill">Sterile</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+</div></section>
 
-  <nav id="navbar" style="top: 34px !important;">
-    <div class="nav-inner">
-      <a href="#" class="logo">amino <em>labs</em></a>
-      <ul class="nav-links">
-        <li><a href="#products">Shop</a></li>
-        <li><a href="#why">About</a></li>
-        <li><a href="#disclaimer">Research</a></li>
-        <li><a href="affiliate.html">Affiliates</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li>
-          <a href="https://3q3qjt-xh.myshopify.com/cart" class="nav-cart" id="shopify-cart-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
-            Cart
-          </a>
-        </li>
-      </ul>
-      <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('show')">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+<section class="why-section" id="why">
+<div class="why-inner">
+<div class="section-header fade-up"><p class="section-tag">Why Amino Labs</p><h2>Built for practices<br>that demand more</h2></div>
+<div class="why-grid">
+<div class="why-card fade-up"><h3>7x Tested</h3><p>Every batch undergoes seven independent quality checks including HPLC, mass spec, endotoxin, and sterility analysis.</p></div>
+<div class="why-card fade-up"><h3>No Fillers</h3><p>Pure lyophilized peptide with no additives. COA with every shipment.</p></div>
+<div class="why-card fade-up"><h3>USA-Made</h3><p>Synthesized in our GMP-certified US facility with climate-controlled shipping nationwide.</p></div>
+</div></div></section>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <p class="hero-tag">Research-Grade Peptides &middot; Made in the USA</p>
-        <h1>Precision <em>peptides</em> for serious research</h1>
-        <p class="hero-sub">Pharmaceutical-grade compounds. Third-party tested at &gt;99% purity. Individually sealed for maximum integrity.</p>
-        <a href="#products" class="hero-cta">
-          Shop Now
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-        </a>
-      </div>
-      <div class="hero-image">
-        <img src="images/packaging.jpg" alt="Amino Labs BPC-157 — Research Grade Peptides" loading="eager">
-      </div>
-    </div>
-  </section>
+<section class="shipping-section">
+<div class="shipping-inner fade-up">
+<div class="section-header">
+<p class="section-tag">Our Process</p>
+<h2 style="font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);font-weight:300;color:var(--charcoal);margin-bottom:20px">Synthesized fresh. Never from&nbsp;shelf&nbsp;stock.</h2>
+<p style="font-size:15px;line-height:1.8;color:var(--text-secondary);max-width:640px;margin:0 auto 48px">Every order is synthesized in small batches with full third-party purity verification before release.</p>
+</div>
+<div class="process-steps">
+<div class="process-step"><div class="step-number">01</div><h4>Order Placed</h4><p>Synthesis begins within 24 hours.</p></div>
+<div class="process-connector"></div>
+<div class="process-step"><div class="step-number">02</div><h4>Synthesis</h4><p>Purified to &gt;99% via HPLC in our US facility.</p></div>
+<div class="process-connector"></div>
+<div class="process-step"><div class="step-number">03</div><h4>QC Testing</h4><p>Third-party verifies purity, mass, endotoxins, sterility.</p></div>
+<div class="process-connector"></div>
+<div class="process-step"><div class="step-number">04</div><h4>Sealed &amp; Shipped</h4><p>Vacuum-sealed, lyophilized, dispatched with tracking.</p></div>
+</div></div></section>
 
-  <!-- TRUST BAR -->
-  <div class="trust-bar">
-    <div class="trust-bar-inner">
-      <div class="trust-item">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-        &gt;99% Purity Verified
-      </div>
-      <div class="trust-item">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
-        Made in the USA
-      </div>
-      <div class="trust-item">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
-        All Major Cards Accepted
-      </div>
-      <div class="trust-item">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
-        Small-Batch Synthesized to Order
-      </div>
-    </div>
-  </div>
+<section class="b2b-section" id="contact-form">
+<div class="b2b-inner">
+<div class="section-header fade-up">
+<p class="section-tag">Partner With Us</p>
+<h2 style="font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;color:var(--charcoal);line-height:1.1">B2B Wholesale Inquiry</h2>
+<p style="font-size:15px;line-height:1.7;color:var(--text-secondary);max-width:540px;margin:24px auto 0">Amino Labs supplies medical practices, clinics, and licensed providers with HPLC-verified compounds. We'll respond within one business day.</p>
+</div>
+<form id="b2b-form" class="b2b-form-wrap fade-up" onsubmit="return b2bSubmit(event)">
+<div class="b2b-row"><input type="text" name="first_name" placeholder="First Name *" required class="b2b-input"><input type="text" name="last_name" placeholder="Last Name *" required class="b2b-input"></div>
+<input type="email" name="email" placeholder="Work Email *" required class="b2b-input" style="margin-bottom:14px">
+<input type="tel" name="phone" placeholder="Phone *" required class="b2b-input" style="margin-bottom:14px">
+<input type="text" name="practice_name" placeholder="Practice / Clinic / Company *" required class="b2b-input" style="margin-bottom:14px">
+<div class="b2b-row">
+<select name="practice_type" required class="b2b-input b2b-select"><option value="">Practice Type *</option><option>Medical Clinic</option><option>Telehealth Provider</option><option>Wellness / Med Spa</option><option>Compounding Pharmacy</option><option>Research Lab</option><option>Distributor</option><option>Other</option></select>
+<input type="text" name="state" placeholder="State *" required class="b2b-input">
+</div>
+<input type="text" name="role" placeholder="Your Role / Title *" required class="b2b-input" style="margin-bottom:24px">
+<div style="background:#f5f0ea;border-radius:12px;padding:20px 22px;margin-bottom:14px">
+<label style="display:block;font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:12px">Do you have a licensed provider on staff who can prescribe? *</label>
+<div style="display:flex;gap:12px">
+<label id="b2b-radio-yes" class="b2b-radio-card" onclick="b2bSelectProvider('Yes')"><input type="radio" name="has_prescriber" value="Yes" required style="accent-color:#1a1a1a"><span>Yes</span></label>
+<label id="b2b-radio-no" class="b2b-radio-card" onclick="b2bSelectProvider('No')"><input type="radio" name="has_prescriber" value="No" style="accent-color:#1a1a1a"><span>No</span></label>
+</div>
+<div id="b2b-prescriber-msg" style="display:none;margin-top:14px;padding:12px 14px;background:#f8e8e0;border-left:3px solid #c87a4f;font-size:13px;line-height:1.6;color:#6b3a1f;border-radius:4px">Amino Labs supplies practices and providers with a licensed prescriber on staff. We're unable to accept inquiries without one.</div>
+</div>
+<select name="monthly_volume" class="b2b-input b2b-select" style="margin-bottom:14px"><option value="">Estimated Monthly Volume (optional)</option><option>Under 50 vials</option><option>50-200 vials</option><option>200-500 vials</option><option>500+ vials</option></select>
+<textarea name="message" placeholder="Tell us about your practice and what you're looking for..." rows="4" class="b2b-input" style="margin-bottom:24px;resize:vertical;font-family:inherit"></textarea>
+<button type="submit" id="b2b-submit" disabled style="width:100%;background:#1a1a1a;color:#fff;border:none;padding:18px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;cursor:pointer;opacity:.4">Submit Inquiry</button>
+</form>
+<div id="b2b-success" style="display:none;text-align:center;padding:48px 40px;background:#fff;border-radius:20px;margin-top:48px">
+<div style="width:64px;height:64px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;margin:0 auto 20px"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+<h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#1a1a1a;margin-bottom:12px">Thank you</h3>
+<p style="font-size:15px;line-height:1.7;color:#6b6259">Your inquiry has been received. We'll respond within one business day.</p>
+</div>
+<div style="margin-top:40px;text-align:center;font-size:13px;line-height:1.8;color:var(--text-secondary)">Amino Labs &middot; 18 W 33rd Street, New York, NY 10001<br>aminolabsresearch@gmail.com &middot; <a href="https://wa.me/13435061952" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:underline">WhatsApp</a></div>
+</div></section>
 
-  <!-- PRODUCTS -->
-  <section class="products-section" id="products">
-    <div class="section-header fade-up">
-      <p class="section-tag">The Collection</p>
-      <h2>Research Peptides</h2>
-    </div>
+<section class="disclaimer-section" id="disclaimer"><div class="disclaimer-inner fade-up"><h3>Research Use Only</h3><p>All products sold by Amino Labs are intended strictly for in vitro research and laboratory use, or for compounding and dispensing by appropriately licensed providers. They are not approved by the FDA for direct consumer use and are not intended to diagnose, treat, cure, or prevent any disease. All purchasers must be at least 21 years of age.</p></div></section>
 
-    <div class="products-grid">
+<section class="refund-section" id="refund-policy"><div class="disclaimer-inner fade-up"><h3>Refund &amp; Replacement Policy</h3><p>All sales are final. If your order arrives damaged in transit, we'll replace it at no additional cost. Contact us within 48 hours with photos.</p></div></section>
 
-      <!-- BPC-157 -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <span class="product-badge">Popular</span>
-          <img src="images/bpc157.jpg" alt="BPC-157 10mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">BPC-157</h3>
-          <p class="product-spec">Body Protection Compound</p>
-          <div class="product-details">
-            <span class="detail-pill">10mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>65</span>
-            <a href="#" class="add-to-cart" data-product="bpc-157">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
+<a href="https://wa.me/13435061952" target="_blank" rel="noopener" style="position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
-      <!-- GLP-1 (SM) -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <img src="images/glp1-sm.jpg" alt="GLP-1 (SM) 10mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">GLP-1 (SM)</h3>
-          <p class="product-spec">Semaglutide Analog</p>
-          <div class="product-details">
-            <span class="detail-pill">10mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>79</span>
-            <a href="#" class="add-to-cart" data-product="glp1-sm">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
+<footer id="contact">
+<div class="footer-inner">
+<div class="footer-top">
+<div><div class="footer-logo">amino <em>labs</em></div><div class="footer-address">18 W 33rd Street<br>New York, NY 10001<br>aminolabsresearch@gmail.com</div></div>
+<div class="footer-links">
+<div class="footer-col"><h4>Catalog</h4><a href="#products">All Products</a><a href="#contact-form">Wholesale Inquiry</a><a href="affiliate.html">Affiliate Program</a></div>
+<div class="footer-col"><h4>Info</h4><a href="#refund-policy">Replacement Policy</a><a href="https://wa.me/13435061952" target="_blank" rel="noopener">Contact</a></div>
+<div class="footer-col"><h4>Legal</h4><a href="privacy.html">Privacy</a><a href="#disclaimer">Terms</a></div>
+</div></div>
+<div class="footer-bottom"><span>&copy; 2026 Amino Labs. All rights reserved. For licensed research and provider use only.</span></div>
+</div></footer>
 
-      <!-- GLP-2 (TZ) -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <span class="product-badge">New</span>
-          <img src="images/glp2-tz.jpg" alt="GLP-2 (TZ) 20mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">GLP-2 (TZ)</h3>
-          <p class="product-spec">Tirzepatide Analog</p>
-          <div class="product-details">
-            <span class="detail-pill">20mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>109</span>
-            <a href="#" class="add-to-cart" data-product="glp2-tz">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GLP-3 (RT) 10mg -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <img src="images/glp3-rt-10mg.jpg" alt="GLP-3 (RT) 10mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">GLP-3 (RT)</h3>
-          <p class="product-spec">Retatrutide Analog</p>
-          <div class="product-details">
-            <span class="detail-pill">10mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>109</span>
-            <a href="#" class="add-to-cart" data-product="glp3-rt-10">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GLP-3 (RT) 20mg -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <span class="product-badge">Best Value</span>
-          <img src="images/glp3-rt-20mg.jpg" alt="GLP-3 (RT) 20mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">GLP-3 (RT)</h3>
-          <p class="product-spec">Retatrutide Analog</p>
-          <div class="product-details">
-            <span class="detail-pill">20mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>179</span>
-            <a href="#" class="add-to-cart" data-product="glp3-rt-20">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- KLOW -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <span class="product-badge">Premium</span>
-          <img src="images/klow.jpg" alt="KLOW 80mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">KLOW</h3>
-          <p class="product-spec">Research Compound</p>
-          <div class="product-details">
-            <span class="detail-pill">80mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>159</span>
-            <a href="#" class="add-to-cart" data-product="klow">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GHK-Cu -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <img src="images/ghk-cu.jpg" alt="GHK-Cu 100mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">GHK-Cu</h3>
-          <p class="product-spec">Copper Peptide</p>
-          <div class="product-details">
-            <span class="detail-pill">100mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>69</span>
-            <a href="#" class="add-to-cart" data-product="ghk-cu">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- GLOW -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <span class="product-badge">New</span>
-          <img src="images/glow.jpg" alt="GLOW 70mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">GLOW</h3>
-          <p class="product-spec">Research Compound</p>
-          <div class="product-details">
-            <span class="detail-pill">70mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>139</span>
-            <a href="#" class="add-to-cart" data-product="glow">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Melanotan 2 -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <img src="images/melanotan2.jpg" alt="Melanotan 2 10mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">Melanotan 2</h3>
-          <p class="product-spec">Tanning Peptide</p>
-          <div class="product-details">
-            <span class="detail-pill">10mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>55</span>
-            <a href="#" class="add-to-cart" data-product="melanotan2">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- MOTS-C -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <span class="product-badge">New</span>
-          <img src="images/motsc.jpg" alt="MOTS-C 20mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">MOTS-C</h3>
-          <p class="product-spec">Mitochondrial Peptide</p>
-          <div class="product-details">
-            <span class="detail-pill">20mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>129</span>
-            <a href="#" class="add-to-cart" data-product="mots-c">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- NAD+ -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <img src="images/nad.jpg" alt="NAD+ 100mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">NAD+</h3>
-          <p class="product-spec">Nicotinamide Adenine Dinucleotide</p>
-          <div class="product-details">
-            <span class="detail-pill">100mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>89</span>
-            <a href="#" class="add-to-cart" data-product="nad">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Selank -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <img src="images/selank.jpg" alt="Selank 10mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">Selank</h3>
-          <p class="product-spec">Nootropic Peptide</p>
-          <div class="product-details">
-            <span class="detail-pill">10mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>55</span>
-            <a href="#" class="add-to-cart" data-product="selank">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Semax -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <img src="images/semax.jpg" alt="Semax 10mg">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">Semax</h3>
-          <p class="product-spec">Nootropic Peptide</p>
-          <div class="product-details">
-            <span class="detail-pill">10mg</span>
-            <span class="detail-pill">Purity &gt;99%</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>99</span>
-            <a href="#" class="add-to-cart" data-product="semax">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bac Water -->
-      <div class="product-card fade-up">
-        <div class="product-image">
-          <img src="images/bacwater.jpg" alt="Bacteriostatic Water 3ml">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">Bac Water</h3>
-          <p class="product-spec">Bacteriostatic Water</p>
-          <div class="product-details">
-            <span class="detail-pill">3ml</span>
-            <span class="detail-pill">Sterile</span>
-          </div>
-          <div class="shipping-note"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Ships within 4–6 business days</div>
-          <div class="product-footer">
-            <span class="product-price"><span class="currency">$</span>10</span>
-            <a href="#" class="add-to-cart" data-product="bacwater">
-              Add to Cart
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="why-section" id="why">
-    <div class="why-inner">
-      <div class="section-header fade-up">
-        <p class="section-tag">Why Amino Labs</p>
-        <h2>Built for researchers<br>who demand more</h2>
-      </div>
-      <div class="why-grid">
-        <div class="why-card fade-up">
-          <div class="why-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
-          </div>
-          <h3>Third-Party Tested</h3>
-          <p>Every batch undergoes independent HPLC analysis and mass spectrometry verification before release.</p>
-        </div>
-        <div class="why-card fade-up">
-          <div class="why-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.746 3.746 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
-          </div>
-          <h3>No Fillers</h3>
-          <p>Pure lyophilized peptide with no mannitol or additives. What's on the label is what's in the vial.</p>
-        </div>
-        <div class="why-card fade-up">
-          <div class="why-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
-          </div>
-          <h3>Secure Checkout</h3>
-          <p>Encrypted payment processing. We accept all major credit cards through our secure Shopify storefront.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SHIPPING PROCESS -->
-  <section class="shipping-section">
-    <div class="shipping-inner fade-up">
-      <div class="section-header">
-        <p class="section-tag">Our Process</p>
-        <h2 style="font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);font-weight:300;color:var(--charcoal);margin-bottom:20px;">Synthesized fresh. Never from&nbsp;shelf&nbsp;stock.</h2>
-        <p style="font-size:15px;line-height:1.8;color:var(--text-secondary);max-width:640px;margin:0 auto 48px;">Every order is synthesized in small batches and undergoes full third-party purity verification before release. We don't ship from sitting inventory — your compound is freshly produced, tested, and sealed specifically for your order. This process takes 4–6 business days. It's not fast, but it's right.</p>
-      </div>
-      <div class="process-steps">
-        <div class="process-step">
-          <div class="step-number">01</div>
-          <h4>Order Placed</h4>
-          <p>Your order enters our production queue and synthesis begins within 24 hours.</p>
-        </div>
-        <div class="process-connector"></div>
-        <div class="process-step">
-          <div class="step-number">02</div>
-          <h4>Synthesis &amp; Purification</h4>
-          <p>Your compound is synthesized fresh and purified to &gt;99% via HPLC in our US facility.</p>
-        </div>
-        <div class="process-connector"></div>
-        <div class="process-step">
-          <div class="step-number">03</div>
-          <h4>QC Testing</h4>
-          <p>Independent third-party lab verifies purity, mass, endotoxins, and sterility before release.</p>
-        </div>
-        <div class="process-connector"></div>
-        <div class="process-step">
-          <div class="step-number">04</div>
-          <h4>Sealed &amp; Shipped</h4>
-          <p>Vacuum-sealed, lyophilized, and dispatched in climate-controlled packaging with tracking.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DISCLAIMER -->
-  <section class="disclaimer-section" id="disclaimer">
-    <div class="disclaimer-inner fade-up">
-      <h3>Research Use Only</h3>
-      <p>All products sold by Amino Labs are intended strictly for in vitro research and laboratory use. They are not approved by the FDA for human or animal consumption and are not intended to diagnose, treat, cure, or prevent any disease. By purchasing from Amino Labs, you agree that these products will only be used for legitimate research purposes. All customers must be at least 21 years of age.</p>
-    </div>
-  </section>
-
-  <!-- REFUND POLICY -->
-  <section class="refund-section" id="refund-policy">
-    <div class="disclaimer-inner fade-up">
-      <h3>Refund &amp; Replacement Policy</h3>
-      <p>All sales are final. Due to the nature of our research-grade compounds, we are unable to offer refunds on any products. If your order arrives damaged or compromised during transit, we will replace it at no additional cost. To request a replacement, contact us within 48 hours of delivery with photos of the damaged product and packaging. Amino Labs is committed to ensuring every order arrives in the condition it left our facility.</p>
-    </div>
-  </section>
-
-  <!-- WHATSAPP BUTTON -->
-  <a id="whatsapp-btn" href="https://wa.me/13435061952" target="_blank" rel="noopener" aria-label="Contact us on WhatsApp" style="
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 999;
-    width: 56px;
-    height: 56px;
-    background: #25D366;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    text-decoration: none;
-  " onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 8px 28px rgba(37,211,102,0.55)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,0.4)'">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="white">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-  </a>
-
-  <!-- FOOTER -->
-  <footer id="contact">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div>
-          <div class="footer-logo">amino <em>labs</em></div>
-        </div>
-        <div class="footer-links">
-          <div class="footer-col">
-            <h4>Shop</h4>
-            <a href="#products">All Products</a>
-            <a href="#">BPC-157</a>
-            <a href="#">GLP Series</a>
-            <a href="#">KLOW</a>
-          </div>
-          <div class="footer-col">
-            <h4>Info</h4>
-            <a href="#">Shipping Policy</a>
-            <a href="#refund-policy">Returns</a>
-            <a href="#">FAQs</a>
-            <a href="https://wa.me/13435061952" target="_blank" rel="noopener">Contact Us</a>
-            <a href="affiliate.html">Affiliate Program</a>
-          </div>
-          <div class="footer-col">
-            <h4>Legal</h4>
-            <a href="#">Terms &amp; Conditions</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="#refund-policy">Refund Policy</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>&copy; 2026 Amino Labs. All rights reserved. For research use only.</span>
-        <div class="payment-icons">
-          <span class="payment-icon">VISA</span>
-          <span class="payment-icon">MC</span>
-          <span class="payment-icon">AMEX</span>
-          <span class="payment-icon">DISC</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Scroll-triggered nav style
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
-
-    // Intersection Observer for fade-up animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // Add to Cart buttons — REPLACE the # with your Shopify cart URLs
-    // Example: https://your-store.myshopify.com/cart/ADD_VARIANT_ID:1
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const product = btn.dataset.product;
-        // ─── SHOPIFY INTEGRATION ───
-        // Replace these placeholder URLs with your actual Shopify product URLs
-        // Format: https://your-store.myshopify.com/cart/VARIANT_ID:1
-        const shopifyLinks = {
-          'bpc-157':    'https://3q3qjt-xh.myshopify.com/cart/add?id=43774029365314&quantity=1&return_to=/cart',
-          'glp1-sm':    'https://3q3qjt-xh.myshopify.com/cart/add?id=43774048239682&quantity=1&return_to=/cart',
-          'glp2-tz':    'https://3q3qjt-xh.myshopify.com/cart/add?id=43774052794434&quantity=1&return_to=/cart',
-          'glp3-rt-10': 'https://3q3qjt-xh.myshopify.com/cart/add?id=43774071734338&quantity=1&return_to=/cart',
-          'glp3-rt-20': 'https://3q3qjt-xh.myshopify.com/cart/add?id=43774071767106&quantity=1&return_to=/cart',
-          'klow':       'https://3q3qjt-xh.myshopify.com/cart/add?id=43774075568194&quantity=1&return_to=/cart',
-          'ghk-cu':     'https://3q3qjt-xh.myshopify.com/cart/add?id=43774079336514&quantity=1&return_to=/cart',
-          'glow':       'https://3q3qjt-xh.myshopify.com/cart/add?id=43774087233602&quantity=1&return_to=/cart',
-          'melanotan2': 'https://3q3qjt-xh.myshopify.com/cart/add?id=43774101585986&quantity=1&return_to=/cart',
-          'mots-c':    'https://3q3qjt-xh.myshopify.com/cart/add?id=43781955027010&quantity=1&return_to=/cart',
-          'nad':       'https://3q3qjt-xh.myshopify.com/cart/add?id=43781955092546&quantity=1&return_to=/cart',
-          'selank':    'https://3q3qjt-xh.myshopify.com/cart/add?id=43781955158082&quantity=1&return_to=/cart',
-          'semax':     'https://3q3qjt-xh.myshopify.com/cart/add?id=43781955387458&quantity=1&return_to=/cart',
-          'bacwater':  'https://3q3qjt-xh.myshopify.com/cart/add?id=43796195868738&quantity=1&return_to=/cart',
-        };
-        if (shopifyLinks[product] && shopifyLinks[product] !== '#') {
-          window.open(shopifyLinks[product], 'aminoCart');
-        } else {
-          // Temporary feedback while no Shopify store is connected
-          btn.innerHTML = `Added ✓`;
-          btn.style.background = '#2d5016';
-          setTimeout(() => {
-            btn.innerHTML = `Add to Cart <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>`;
-            btn.style.background = '';
-          }, 1500);
-        }
-      });
-    });
-
-    // Mobile nav
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
-    if (mobileBtn) {
-      mobileBtn.addEventListener('click', () => {
-        const links = document.querySelector('.nav-links');
-        links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-        links.style.flexDirection = 'column';
-        links.style.position = 'absolute';
-        links.style.top = '60px';
-        links.style.right = '24px';
-        links.style.background = 'white';
-        links.style.padding = '20px';
-        links.style.borderRadius = '12px';
-        links.style.boxShadow = '0 10px 40px rgba(0,0,0,0.1)';
-        links.style.gap = '16px';
-      });
-    }
-  </script>
-
-  <script>
-  (async function() {
-    try {
-      const geoRes = await fetch('https://ipapi.co/json/');
-      const geo = await geoRes.json();
-      if (geo.country_code !== 'CO') return;
-
-      let copRate = 4200;
-      try {
-        const fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
-        const fx = await fxRes.json();
-        if (fx.rates && fx.rates.COP) copRate = fx.rates.COP;
-      } catch(e) {}
-
-      applySpanish(copRate);
-    } catch(e) {}
-
-    function setTxt(selector, text) {
-      const el = document.querySelector(selector);
-      if (el) el.textContent = text;
-    }
-    function setHTML(selector, html) {
-      const el = document.querySelector(selector);
-      if (el) el.innerHTML = html;
-    }
-    function setLastTextNode(el, text) {
-      for (let i = el.childNodes.length - 1; i >= 0; i--) {
-        if (el.childNodes[i].nodeType === Node.TEXT_NODE) {
-          el.childNodes[i].textContent = ' ' + text;
-          return;
-        }
-      }
-    }
-    function setFirstTextNode(el, text) {
-      for (let i = 0; i < el.childNodes.length; i++) {
-        if (el.childNodes[i].nodeType === Node.TEXT_NODE && el.childNodes[i].textContent.trim()) {
-          el.childNodes[i].textContent = text + ' ';
-          return;
-        }
-      }
-    }
-
-    function applySpanish(copRate) {
-      document.documentElement.lang = 'es';
-
-      const ageGate = document.getElementById('age-gate');
-      if (ageGate) {
-        const h2 = ageGate.querySelector('h2');
-        if (h2) h2.textContent = 'Verificación de Edad';
-        const p = ageGate.querySelector('p');
-        if (p) p.textContent = 'Debes tener 21 años o más para ingresar a este sitio. Al hacer clic en "Entrar" confirmas que tienes al menos 21 años.';
-        const btns = ageGate.querySelectorAll('button');
-        if (btns[0]) btns[0].textContent = 'Soy Mayor de 21';
-        if (btns[1]) btns[1].textContent = 'Salir';
-      }
-
-      const copThreshold = Math.round(200 * copRate);
-      const banner = document.getElementById('shipping-banner');
-      if (banner) banner.textContent = 'Envío gratis en pedidos mayores a COP ' + copThreshold.toLocaleString('es-CO') + ' \u00B7 Envío en 4\u20136 días hábiles';
-
-      const navLinkMap = { 'Shop':'Tienda', 'About':'Nosotros', 'Research':'Investigación', 'Affiliates':'Afiliados', 'Contact':'Contacto' };
-      document.querySelectorAll('.nav-links a').forEach(a => {
-        const t = a.textContent.trim();
-        if (navLinkMap[t]) a.textContent = navLinkMap[t];
-      });
-      const cartLink = document.getElementById('shopify-cart-link');
-      if (cartLink) setLastTextNode(cartLink, 'Carrito');
-
-      setTxt('.hero-tag', 'Péptidos Grado Investigación \u00B7 Fabricado en EE.UU.');
-      setHTML('.hero h1', 'Péptidos de <em>precisión</em> para investigación seria');
-      setTxt('.hero-sub', 'Compuestos de grado farmacéutico. Analizados por terceros con >99% de pureza. Sellados individualmente para máxima integridad.');
-      const heroCta = document.querySelector('.hero-cta');
-      if (heroCta) setFirstTextNode(heroCta, 'Comprar Ahora');
-
-      document.querySelectorAll('.trust-item').forEach((item, i) => {
-        const texts = ['>99% de Pureza Verificada', 'Fabricado en EE.UU.', 'Todas las Tarjetas Aceptadas', 'Sintetizado en Pequeños Lotes a Pedido'];
-        if (texts[i]) {
-          const svg = item.querySelector('svg');
-          item.textContent = texts[i];
-          if (svg) item.prepend(svg);
-        }
-      });
-
-      setTxt('.products-section .section-tag', 'La Colección');
-      setTxt('.products-section h2', 'Péptidos de Investigación');
-
-      const badgeMap = { 'Popular':'Popular', 'New':'Nuevo', 'Best Value':'Mejor Valor', 'Premium':'Premium' };
-      document.querySelectorAll('.product-badge').forEach(b => { if (badgeMap[b.textContent.trim()]) b.textContent = badgeMap[b.textContent.trim()]; });
-
-      const specMap = {
-        'Body Protection Compound':'Compuesto de Protección Corporal',
-        'Semaglutide Analog':'Análogo de Semaglutida',
-        'Tirzepatide Analog':'Análogo de Tirzepatida',
-        'Retatrutide Analog':'Análogo de Retatrutida',
-        'Research Compound':'Compuesto de Investigación',
-        'Copper Peptide':'Péptido de Cobre',
-        'Tanning Peptide':'Péptido Bronceador',
-        'Mitochondrial Peptide':'Péptido Mitocondrial',
-        'Nicotinamide Adenine Dinucleotide':'Dinucleótido de Nicotinamida y Adenina',
-        'Nootropic Peptide':'Péptido Nootrópico',
-        'Bacteriostatic Water':'Agua Bacteriostática',
-      };
-      document.querySelectorAll('.product-spec').forEach(el => { if (specMap[el.textContent.trim()]) el.textContent = specMap[el.textContent.trim()]; });
-
-      document.querySelectorAll('.detail-pill').forEach(el => {
-        if (el.textContent.trim() === 'Purity >99%') el.textContent = 'Pureza >99%';
-        if (el.textContent.trim() === 'Sterile') el.textContent = 'Estéril';
-      });
-
-      document.querySelectorAll('.shipping-note').forEach(el => {
-        const svg = el.querySelector('svg');
-        el.textContent = 'Envío en 4\u20136 días hábiles';
-        if (svg) el.prepend(svg);
-      });
-
-      document.querySelectorAll('.add-to-cart').forEach(btn => {
-        const svg = btn.querySelector('svg');
-        btn.textContent = 'Agregar al Carrito ';
-        if (svg) btn.appendChild(svg);
-      });
-
-      setTxt('.why-section .section-tag', 'Por Qué Amino Labs');
-      setHTML('.why-section h2', 'Creado para investigadores<br>que exigen más');
-      const whyData = [
-        { h3:'Analizado por Terceros', p:'Cada lote se somete a análisis HPLC independiente y verificación por espectrometría de masas antes de su distribución.' },
-        { h3:'Sin Rellenos', p:'Péptido liofilizado puro sin manitol ni aditivos. Lo que dice la etiqueta es lo que hay en el vial.' },
-        { h3:'Pago Seguro', p:'Procesamiento de pagos encriptado. Aceptamos todas las tarjetas de crédito principales a través de nuestra tienda segura.' },
-      ];
-      document.querySelectorAll('.why-card').forEach((card, i) => {
-        if (!whyData[i]) return;
-        const h3 = card.querySelector('h3');
-        const p = card.querySelector('p');
-        if (h3) h3.textContent = whyData[i].h3;
-        if (p) p.textContent = whyData[i].p;
-      });
-
-      setTxt('.shipping-section .section-tag', 'Nuestro Proceso');
-      setHTML('.shipping-section h2', 'Sintetizado fresco. Nunca de&nbsp;inventario&nbsp;en&nbsp;existencia.');
-      const shipDesc = document.querySelector('.shipping-section .section-header p');
-      if (shipDesc) shipDesc.textContent = 'Cada pedido se sintetiza en pequeños lotes y se somete a verificación de pureza completa por terceros antes de su distribución. No enviamos desde inventario en almacén: su compuesto es producido de forma fresca, analizado y sellado específicamente para su pedido. Este proceso tarda 4–6 días hábiles. No es rápido, pero es correcto.';
-      const stepData = [
-        { h4:'Pedido Realizado', p:'Su pedido entra en nuestra cola de producción y la síntesis comienza en menos de 24 horas.' },
-        { h4:'Síntesis y Purificación', p:'Su compuesto se sintetiza de forma fresca y se purifica a >99% mediante HPLC en nuestra instalación en EE.UU.' },
-        { h4:'Control de Calidad', p:'Un laboratorio independiente verifica la pureza, masa, endotoxinas y esterilidad antes de la distribución.' },
-        { h4:'Sellado y Enviado', p:'Sellado al vacío, liofilizado y despachado en embalaje controlado térmicamente con número de seguimiento.' },
-      ];
-      document.querySelectorAll('.process-step').forEach((step, i) => {
-        if (!stepData[i]) return;
-        const h4 = step.querySelector('h4');
-        const p = step.querySelector('p');
-        if (h4) h4.textContent = stepData[i].h4;
-        if (p) p.textContent = stepData[i].p;
-      });
-
-      const disc = document.querySelector('.disclaimer-section .disclaimer-inner');
-      if (disc) {
-        const h3 = disc.querySelector('h3');
-        const p = disc.querySelector('p');
-        if (h3) h3.textContent = 'Solo para Uso de Investigación';
-        if (p) p.textContent = 'Todos los productos vendidos por Amino Labs están destinados exclusivamente para investigación in vitro y uso en laboratorio. No han sido aprobados por la FDA para consumo humano o animal y no están destinados a diagnosticar, tratar, curar o prevenir ninguna enfermedad. Al comprar en Amino Labs, usted acepta que estos productos solo se utilizarán con fines legítimos de investigación. Todos los clientes deben tener al menos 21 años de edad.';
-      }
-
-      const refund = document.querySelector('.refund-section .disclaimer-inner');
-      if (refund) {
-        const h3 = refund.querySelector('h3');
-        const p = refund.querySelector('p');
-        if (h3) h3.textContent = 'Política de Reembolso y Reposición';
-        if (p) p.textContent = 'Todas las ventas son definitivas. Debido a la naturaleza de nuestros compuestos de grado investigación, no podemos ofrecer reembolsos en ningún producto. Si su pedido llega dañado o comprometido durante el tránsito, lo repondremos sin costo adicional. Para solicitar una reposición, contáctenos dentro de las 48 horas posteriores a la entrega con fotos del producto y el embalaje dañados. Amino Labs se compromete a garantizar que cada pedido llegue en las mismas condiciones en que salió de nuestra instalación.';
-      }
-
-      const footerCols = document.querySelectorAll('.footer-col');
-      const footerColData = [
-        { h4:'Tienda', links:['Todos los Productos','BPC-157','Serie GLP','KLOW'] },
-        { h4:'Información', links:['Política de Envío','Devoluciones','Preguntas Frecuentes','Contáctenos','Programa de Afiliados'] },
-        { h4:'Legal', links:['Términos y Condiciones','Política de Privacidad','Política de Reembolso'] },
-      ];
-      footerCols.forEach((col, i) => {
-        if (!footerColData[i]) return;
-        const h4 = col.querySelector('h4');
-        if (h4) h4.textContent = footerColData[i].h4;
-        col.querySelectorAll('a').forEach((a, j) => {
-          if (footerColData[i].links[j]) a.textContent = footerColData[i].links[j];
-        });
-      });
-
-      const copyright = document.querySelector('.footer-bottom span');
-      if (copyright) copyright.textContent = '© 2026 Amino Labs. Todos los derechos reservados. Solo para uso de investigación.';
-
-      document.querySelectorAll('.product-price').forEach(el => {
-        const currency = el.querySelector('.currency');
-        let usdText = '';
-        for (const node of el.childNodes) {
-          if (node.nodeType === Node.TEXT_NODE) usdText = node.textContent.trim();
-        }
-        const usd = parseFloat(usdText);
-        if (!isNaN(usd) && currency) {
-          const cop = Math.round(usd * copRate);
-          currency.textContent = 'COP ';
-          for (const node of el.childNodes) {
-            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-              node.textContent = cop.toLocaleString('es-CO');
-            }
-          }
-        }
-      });
-
-    }
-  })();
-  </script>
-
+<script>
+var navbar=document.getElementById('navbar');
+window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>50)});
+var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry,i){if(entry.isIntersecting){setTimeout(function(){entry.target.classList.add('visible')},i*80);observer.unobserve(entry.target)}})},{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(function(el){observer.observe(el)});
+var mb=document.querySelector('.mobile-menu-btn');
+if(mb){mb.addEventListener('click',function(){var l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex';l.style.flexDirection='column';l.style.position='absolute';l.style.top='60px';l.style.right='24px';l.style.background='#fff';l.style.padding='20px';l.style.borderRadius='12px';l.style.boxShadow='0 10px 40px rgba(0,0,0,.1)';l.style.gap='16px'})}
+window.b2bSelectProvider=function(val){var msg=document.getElementById('b2b-prescriber-msg');var btn=document.getElementById('b2b-submit');var y=document.getElementById('b2b-radio-yes');var n=document.getElementById('b2b-radio-no');if(val==='No'){msg.style.display='block';btn.disabled=true;btn.style.opacity='.4';btn.style.cursor='not-allowed';y.classList.remove('selected');n.classList.add('selected')}else{msg.style.display='none';btn.disabled=false;btn.style.opacity='1';btn.style.cursor='pointer';y.classList.add('selected');n.classList.remove('selected')}};
+window.b2bSubmit=function(e){e.preventDefault();var btn=document.getElementById('b2b-submit');var form=e.target;var data={};Array.from(form.elements).forEach(function(el){if(el.name&&el.type!=='radio')data[el.name]=el.value.trim()});var radios=form.querySelectorAll('input[name="has_prescriber"]');radios.forEach(function(r){if(r.checked)data.has_prescriber=r.value});if(data.has_prescriber!=='Yes')return false;btn.disabled=true;btn.textContent='Submitting...';var payload={data:{type:'profile',attributes:{email:data.email,phone_number:data.phone,first_name:data.first_name,last_name:data.last_name,organization:data.practice_name,title:data.role,location:{region:data.state},properties:{'Practice Type':data.practice_type,'State':data.state,'Has Licensed Prescriber':data.has_prescriber,'Estimated Monthly Volume':data.monthly_volume||'Not specified','Message':data.message||'','Source':'aminolabsresearch_b2b_contact','Lead Type':'B2B Provider Inquiry'}}}};var showSuccess=function(){form.style.display='none';var s=document.getElementById('b2b-success');s.style.display='block';s.scrollIntoView({behavior:'smooth',block:'center'})};fetch('https://a.klaviyo.com/client/profiles/?company_id=Xq8DT7',{method:'POST',headers:{'Content-Type':'application/json','revision':'2024-10-15'},body:JSON.stringify(payload)}).then(showSuccess).catch(showSuccess);return false};
+</script>
 </body>
 </html>
