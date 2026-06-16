@@ -107,215 +107,51 @@ footer{background:var(--soft-black);padding:60px 40px 40px;color:rgba(255,255,25
 <body>
 <!-- ACCESS GATE — Verified Partners Only -->
 <style>
-#access-gate{font-family:'DM Sans',sans-serif}
-#access-gate .gate-input{width:100%;padding:13px 16px;border:1px solid #e8e0d4;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;background:#fff;color:#1a1a1a;outline:none;transition:border-color .2s}
-#access-gate .gate-input:focus{border-color:#1a1a1a}
-#access-gate .gate-select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%236b6259' stroke-width='2'><polyline points='1,1 6,6 11,1'/></svg>");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
-#access-gate .gate-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-#access-gate .gate-radio{flex:1;display:flex;align-items:center;gap:8px;padding:12px 16px;background:#fff;border:1.5px solid #e8e0d4;border-radius:8px;cursor:pointer;font-size:14px;transition:border-color .2s,background .2s}
-#access-gate .gate-radio.selected{border-color:#1a1a1a;background:#fafafa}
-#access-gate .gate-primary{width:100%;background:#1a1a1a;color:#fff;border:none;padding:16px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;cursor:pointer;transition:background .3s,opacity .3s}
-#access-gate .gate-primary:hover:not(:disabled){background:#000}
-#access-gate .gate-primary:disabled{opacity:.4;cursor:not-allowed}
-#access-gate .gate-link{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:#6b6259;text-decoration:underline;cursor:pointer;padding:0}
-#access-gate .gate-link:hover{color:#1a1a1a}
-@media(max-width:520px){#access-gate .gate-row{grid-template-columns:1fr}#access-gate-inner{padding:40px 28px!important}#access-gate .gate-trust{grid-template-columns:1fr!important;text-align:center!important;gap:18px!important}}
-@keyframes gateShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-#access-gate .shake{animation:gateShake .4s;border-color:#c87a4f!important}
+#age-gate{position:fixed;inset:0;z-index:9999;background:rgba(13,13,13,.95);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;font-family:'DM Sans',sans-serif;transition:opacity .4s}
+#age-gate-card{background:#faf8f5;border-radius:20px;padding:48px 40px;max-width:440px;width:100%;text-align:center;box-shadow:0 40px 80px rgba(0,0,0,.4)}
+#age-gate .ag-logo{font-family:'Cormorant Garamond',serif;font-size:34px;color:#1a1a1a;line-height:1;margin-bottom:6px}
+#age-gate .ag-logo em{font-style:italic;font-weight:300;font-size:28px;color:#6b6259}
+#age-gate .ag-rule{width:42px;height:1px;background:#c4b8a8;margin:20px auto 24px}
+#age-gate .ag-tag{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#9a9088;margin-bottom:14px}
+#age-gate .ag-heading{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#1a1a1a;line-height:1.2;margin-bottom:14px}
+#age-gate .ag-body{font-size:13.5px;line-height:1.7;color:#6b6259;margin:0 auto 28px;max-width:340px}
+#age-gate .ag-actions{display:flex;flex-direction:column;gap:10px}
+#age-gate .ag-primary{background:#1a1a1a;color:#fff;border:none;padding:15px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;cursor:pointer;transition:background .25s}
+#age-gate .ag-primary:hover{background:#000}
+#age-gate .ag-secondary{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:12px;color:#9a9088;text-decoration:underline;cursor:pointer;padding:8px}
+#age-gate .ag-secondary:hover{color:#1a1a1a}
+#age-gate .ag-disclaimer{margin-top:24px;padding-top:20px;border-top:1px solid rgba(0,0,0,.06);font-size:11px;line-height:1.6;color:#9a9088}
+@media(max-width:520px){#age-gate-card{padding:36px 26px}}
 </style>
 
-<div id="access-gate" style="position:fixed;inset:0;z-index:9999;background:#0d0d0d;display:flex;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;transition:opacity .5s">
-<div id="access-gate-inner" style="background:#faf8f5;border-radius:24px;padding:56px 48px;max-width:520px;width:100%;text-align:center;box-shadow:0 60px 120px rgba(0,0,0,.5);margin:auto">
-
-<!-- Brand mark -->
-<div style="font-family:'Cormorant Garamond',serif;font-size:36px;color:#1a1a1a;line-height:1">amino <em style="font-style:italic;font-weight:300;font-size:30px;color:#6b6259">labs</em></div>
-<div style="width:48px;height:1px;background:#c4b8a8;margin:22px auto"></div>
-
-<!-- STATE 1: Default landing -->
-<div id="gate-default">
-<p style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#9a9088;margin-bottom:20px">Verified Partners Only</p>
-<h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#1a1a1a;line-height:1.2;margin-bottom:20px">By approval.<br><em style="font-style:italic">By appointment.</em></h2>
-<p style="font-size:14px;line-height:1.8;color:#6b6259;margin:0 auto 36px;max-width:380px">Amino Labs supplies a limited network of licensed providers, medical practices, and research institutions. Catalog access is granted by application.</p>
-<button onclick="amGate('application')" class="gate-primary" style="max-width:280px;margin-bottom:20px">Request Access</button>
-<div><button onclick="amGate('code')" class="gate-link">Already approved? Enter access code</button></div>
-
-<!-- Trust strip -->
-<div class="gate-trust" style="margin-top:36px;padding-top:28px;border-top:1px solid rgba(0,0,0,.08);display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left">
-<div>
-<p style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#1a1a1a;margin-bottom:6px">USA Made</p>
-<p style="font-size:12px;line-height:1.55;color:#6b6259">GMP-certified US synthesis</p>
+<div id="age-gate">
+<div id="age-gate-card">
+<div class="ag-logo">amino <em>labs</em></div>
+<div class="ag-rule"></div>
+<p class="ag-tag">Age Verification</p>
+<h2 class="ag-heading">Adults only</h2>
+<p class="ag-body">By entering this site, you confirm you are 21 years of age or older and acknowledge that all products are intended strictly for research and laboratory use.</p>
+<div class="ag-actions">
+<button onclick="amEnter()" class="ag-primary">I Am 21 or Older</button>
+<button onclick="amExit()" class="ag-secondary">Exit</button>
 </div>
-<div>
-<p style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#1a1a1a;margin-bottom:6px">7× Tested</p>
-<p style="font-size:12px;line-height:1.55;color:#6b6259">HPLC, mass spec, sterility</p>
-</div>
-<div>
-<p style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#1a1a1a;margin-bottom:6px">&gt;99% Purity</p>
-<p style="font-size:12px;line-height:1.55;color:#6b6259">Independent third-party verified</p>
-</div>
-</div>
-
-<p style="margin-top:24px;font-size:11px;line-height:1.7;color:#9a9088;max-width:400px;margin-left:auto;margin-right:auto">Every batch ships with a Certificate of Analysis. Synthesized fresh in small batches — never from shelf stock.</p>
-</div>
-
-<!-- STATE 2: Application form -->
-<div id="gate-application" style="display:none;text-align:left">
-<p style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#9a9088;margin-bottom:12px;text-align:center">Access Application</p>
-<h2 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#1a1a1a;line-height:1.2;margin-bottom:8px;text-align:center">Tell us about your practice</h2>
-<p style="font-size:13px;line-height:1.6;color:#6b6259;margin:0 auto 28px;max-width:380px;text-align:center">Applications are reviewed within one business day.</p>
-
-<form id="access-form" onsubmit="return amSubmitAccess(event)">
-<div class="gate-row">
-<input type="text" name="first_name" placeholder="First Name *" required class="gate-input">
-<input type="text" name="last_name" placeholder="Last Name *" required class="gate-input">
-</div>
-<input type="email" name="email" placeholder="Work Email *" required class="gate-input" style="margin-bottom:12px">
-<input type="tel" name="phone" placeholder="Phone *" required class="gate-input" style="margin-bottom:12px">
-<input type="text" name="practice_name" placeholder="Practice / Clinic / Company *" required class="gate-input" style="margin-bottom:12px">
-<div class="gate-row">
-<select name="practice_type" required class="gate-input gate-select">
-<option value="">Practice Type *</option>
-<option>Medical Clinic</option>
-<option>Telehealth Provider</option>
-<option>Wellness / Med Spa</option>
-<option>Compounding Pharmacy</option>
-<option>Research Lab</option>
-<option>Distributor</option>
-<option>Other</option>
-</select>
-<input type="text" name="state" placeholder="State *" required class="gate-input">
-</div>
-<input type="text" name="role" placeholder="Your Role / Title *" required class="gate-input" style="margin-bottom:18px">
-
-<div style="background:#f0eae0;border-radius:12px;padding:18px 20px;margin-bottom:12px">
-<label style="display:block;font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:10px">Licensed prescriber on staff? *</label>
-<div style="display:flex;gap:10px">
-<label id="am-yes" class="gate-radio" onclick="amSelectPrescriber('Yes')"><input type="radio" name="has_prescriber" value="Yes" required style="accent-color:#1a1a1a"><span>Yes</span></label>
-<label id="am-no" class="gate-radio" onclick="amSelectPrescriber('No')"><input type="radio" name="has_prescriber" value="No" style="accent-color:#1a1a1a"><span>No</span></label>
-</div>
-<div id="am-no-msg" style="display:none;margin-top:12px;padding:10px 12px;background:#f8e8e0;border-left:3px solid #c87a4f;font-size:12px;line-height:1.6;color:#6b3a1f;border-radius:4px">Amino Labs supplies only practices with a licensed prescriber on staff.</div>
-</div>
-
-<input type="text" name="license_number" placeholder="License # — DEA, NPI, or state (optional)" class="gate-input" style="margin-bottom:12px">
-<textarea name="message" placeholder="How did you hear about us? Tell us briefly about your practice." rows="3" class="gate-input" style="margin-bottom:22px;resize:vertical;font-family:inherit"></textarea>
-
-<button type="submit" id="am-submit" disabled class="gate-primary">Submit Application</button>
-</form>
-
-<div style="text-align:center;margin-top:18px"><button type="button" onclick="amGate('default')" class="gate-link" style="font-size:12px;color:#9a9088">← Back</button></div>
-</div>
-
-<!-- STATE 3: Code entry -->
-<div id="gate-code" style="display:none">
-<p style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#9a9088;margin-bottom:14px">Partner Access</p>
-<h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#1a1a1a;line-height:1.2;margin-bottom:8px">Enter your access code</h2>
-<p style="font-size:13px;line-height:1.6;color:#6b6259;margin:0 auto 28px;max-width:340px">Provided via email after your application is approved.</p>
-
-<input type="text" id="am-code-input" placeholder="Access Code" class="gate-input" style="text-align:center;letter-spacing:2px;font-size:15px;margin-bottom:14px" autocomplete="off" autocapitalize="characters">
-<div id="am-code-error" style="display:none;color:#c87a4f;font-size:13px;margin-bottom:14px">Invalid access code. Please check and try again.</div>
-<button onclick="amVerifyCode()" class="gate-primary">Enter Site</button>
-<div style="text-align:center;margin-top:18px"><button type="button" onclick="amGate('default')" class="gate-link" style="font-size:12px;color:#9a9088">← Back</button></div>
-</div>
-
-<!-- STATE 4: Application success -->
-<div id="gate-success" style="display:none">
-<div style="width:64px;height:64px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;margin:0 auto 22px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
-<p style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#9a9088;margin-bottom:14px">Application Received</p>
-<h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#1a1a1a;line-height:1.2;margin-bottom:16px">Thank you</h2>
-<p style="font-size:14px;line-height:1.8;color:#6b6259;margin:0 auto 24px;max-width:380px">We'll review your application and respond within one business day with your access details.</p>
-<a href="https://wa.me/13435061952" target="_blank" rel="noopener" style="font-size:13px;color:#6b6259;text-decoration:underline">Reach us on WhatsApp</a>
-</div>
-
-<!-- Footer disclaimer -->
-<div style="margin-top:36px;padding-top:24px;border-top:1px solid rgba(0,0,0,.06);font-size:11px;line-height:1.6;color:#9a9088">For licensed research and provider use only. 21+.</div>
-
+<p class="ag-disclaimer">For research and laboratory use only. Not for human or animal consumption.</p>
 </div></div>
 
 <script>
 (function(){
-  if(localStorage.getItem('aminoLabsAccess')==='partner-verified-v1'){
-    document.getElementById('access-gate').style.display='none';
+  if(sessionStorage.getItem('aminoLabsAgeVerified')==='1'){
+    document.getElementById('age-gate').style.display='none';
   }
 })();
-
-function amGate(state){
-  ['default','application','code','success'].forEach(function(s){
-    document.getElementById('gate-'+s).style.display=(s===state)?'block':'none';
-  });
-  if(state==='code'){setTimeout(function(){document.getElementById('am-code-input').focus()},100)}
-  document.getElementById('access-gate').scrollTop=0;
+function amEnter(){
+  sessionStorage.setItem('aminoLabsAgeVerified','1');
+  var g=document.getElementById('age-gate');
+  g.style.opacity='0';
+  setTimeout(function(){g.style.display='none'},400);
 }
-
-function amSelectPrescriber(val){
-  var msg=document.getElementById('am-no-msg');
-  var btn=document.getElementById('am-submit');
-  var y=document.getElementById('am-yes');
-  var n=document.getElementById('am-no');
-  if(val==='No'){msg.style.display='block';btn.disabled=true;y.classList.remove('selected');n.classList.add('selected')}
-  else{msg.style.display='none';btn.disabled=false;y.classList.add('selected');n.classList.remove('selected')}
-}
-
-function amVerifyCode(){
-  var input=document.getElementById('am-code-input');
-  var err=document.getElementById('am-code-error');
-  var code=input.value.trim().toUpperCase();
-  if(code==='AMINOLABS-2026'){
-    localStorage.setItem('aminoLabsAccess','partner-verified-v1');
-    var g=document.getElementById('access-gate');
-    g.style.opacity='0';
-    setTimeout(function(){g.style.display='none'},500);
-  } else {
-    err.style.display='block';
-    input.classList.add('shake');
-    setTimeout(function(){input.classList.remove('shake')},400);
-  }
-}
-
-document.addEventListener('DOMContentLoaded',function(){
-  var ci=document.getElementById('am-code-input');
-  if(ci) ci.addEventListener('keypress',function(e){if(e.key==='Enter'){e.preventDefault();amVerifyCode()}});
-});
-
-function amSubmitAccess(e){
-  e.preventDefault();
-  var form=e.target;
-  var btn=document.getElementById('am-submit');
-  btn.disabled=true;
-  btn.textContent='Submitting...';
-
-  var data={};
-  Array.from(form.elements).forEach(function(el){if(el.name&&el.type!=='radio')data[el.name]=el.value.trim()});
-  var radios=form.querySelectorAll('input[name="has_prescriber"]');
-  radios.forEach(function(r){if(r.checked)data.has_prescriber=r.value});
-  if(data.has_prescriber!=='Yes'){btn.disabled=false;btn.textContent='Submit Application';return false}
-
-  var payload={data:{type:'profile',attributes:{
-    email:data.email,
-    phone_number:data.phone,
-    first_name:data.first_name,
-    last_name:data.last_name,
-    organization:data.practice_name,
-    title:data.role,
-    location:{region:data.state},
-    properties:{
-      'Practice Type':data.practice_type,
-      'State':data.state,
-      'Has Licensed Prescriber':data.has_prescriber,
-      'License Number':data.license_number||'Not provided',
-      'Message':data.message||'',
-      'Source':'aminolabsresearch_access_application',
-      'Lead Type':'Site Access Application'
-    }
-  }}};
-
-  var showSuccess=function(){amGate('success')};
-  fetch('https://a.klaviyo.com/client/profiles/?company_id=Xq8DT7',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','revision':'2024-10-15'},
-    body:JSON.stringify(payload)
-  }).then(showSuccess).catch(showSuccess);
-
-  return false;
+function amExit(){
+  window.location.href='https://www.google.com';
 }
 </script>
 
@@ -361,20 +197,20 @@ USA Made &middot; 7x Tested
 <p style="font-size:14px;line-height:1.7;color:var(--text-secondary);max-width:540px;margin:24px auto 0">Contact us for wholesale pricing and case-quantity ordering.</p>
 </div>
 <div class="products-grid">
-<div class="product-card fade-up"><div class="product-image"><span class="product-badge">Popular</span><img src="images/bpc157.jpg" alt="BPC-157"></div><div class="product-info"><h3 class="product-name">BPC-157</h3><p class="product-spec">Body Protection Compound</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><img src="images/glp1-sm.jpg" alt="GLP-1"></div><div class="product-info"><h3 class="product-name">GLP-1 (SM)</h3><p class="product-spec">Semaglutide Analog</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><span class="product-badge">New</span><img src="images/glp2-tz.jpg" alt="GLP-2"></div><div class="product-info"><h3 class="product-name">GLP-2 (TZ)</h3><p class="product-spec">Tirzepatide Analog</p><div class="product-details"><span class="detail-pill">20mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><img src="images/glp3-rt-10mg.jpg" alt="GLP-3 10mg"></div><div class="product-info"><h3 class="product-name">GLP-3 (RT)</h3><p class="product-spec">Retatrutide Analog</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><span class="product-badge">Best Value</span><img src="images/glp3-rt-20mg.jpg" alt="GLP-3 20mg"></div><div class="product-info"><h3 class="product-name">GLP-3 (RT)</h3><p class="product-spec">Retatrutide Analog</p><div class="product-details"><span class="detail-pill">20mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><span class="product-badge">Premium</span><img src="images/klow.jpg" alt="KLOW"></div><div class="product-info"><h3 class="product-name">KLOW</h3><p class="product-spec">Research Compound</p><div class="product-details"><span class="detail-pill">80mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><img src="images/ghk-cu.jpg" alt="GHK-Cu"></div><div class="product-info"><h3 class="product-name">GHK-Cu</h3><p class="product-spec">Copper Peptide</p><div class="product-details"><span class="detail-pill">100mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><span class="product-badge">New</span><img src="images/glow.jpg" alt="GLOW"></div><div class="product-info"><h3 class="product-name">GLOW</h3><p class="product-spec">Research Compound</p><div class="product-details"><span class="detail-pill">70mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><img src="images/melanotan2.jpg" alt="MT-2"></div><div class="product-info"><h3 class="product-name">Melanotan 2</h3><p class="product-spec">Tanning Peptide</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><span class="product-badge">New</span><img src="images/motsc.jpg" alt="MOTS-C"></div><div class="product-info"><h3 class="product-name">MOTS-C</h3><p class="product-spec">Mitochondrial Peptide</p><div class="product-details"><span class="detail-pill">20mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><img src="images/nad.jpg" alt="NAD+"></div><div class="product-info"><h3 class="product-name">NAD+</h3><p class="product-spec">Nicotinamide Adenine Dinucleotide</p><div class="product-details"><span class="detail-pill">100mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><img src="images/selank.jpg" alt="Selank"></div><div class="product-info"><h3 class="product-name">Selank</h3><p class="product-spec">Nootropic Peptide</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><img src="images/semax.jpg" alt="Semax"></div><div class="product-info"><h3 class="product-name">Semax</h3><p class="product-spec">Nootropic Peptide</p><div class="product-details"><span class="detail-pill">10mg</span><span class="detail-pill">&gt;99%</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
-<div class="product-card fade-up"><div class="product-image"><img src="images/bacwater.jpg" alt="Bac Water"></div><div class="product-info"><h3 class="product-name">Bac Water</h3><p class="product-spec">Bacteriostatic Water</p><div class="product-details"><span class="detail-pill">3ml</span><span class="detail-pill">Sterile</span></div><div class="shipping-note">4–6 day lead time</div></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/bpc157.jpg" alt="BPC-157"></div><div class="product-info"><h3 class="product-name">BPC-157</h3><p class="product-spec">Body Protection Compound</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/glp1-sm.jpg" alt="GLP-1"></div><div class="product-info"><h3 class="product-name">GLP-1 (SM)</h3><p class="product-spec">Semaglutide Analog</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/glp2-tz.jpg" alt="GLP-2"></div><div class="product-info"><h3 class="product-name">GLP-2 (TZ)</h3><p class="product-spec">Tirzepatide Analog</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/glp3-rt-10mg.jpg" alt="GLP-3 10mg"></div><div class="product-info"><h3 class="product-name">GLP-3 (RT)</h3><p class="product-spec">Retatrutide Analog</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/glp3-rt-20mg.jpg" alt="GLP-3 20mg"></div><div class="product-info"><h3 class="product-name">GLP-3 (RT)</h3><p class="product-spec">Retatrutide Analog</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/klow.jpg" alt="KLOW"></div><div class="product-info"><h3 class="product-name">KLOW</h3><p class="product-spec">Research Compound</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/ghk-cu.jpg" alt="GHK-Cu"></div><div class="product-info"><h3 class="product-name">GHK-Cu</h3><p class="product-spec">Copper Peptide</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/glow.jpg" alt="GLOW"></div><div class="product-info"><h3 class="product-name">GLOW</h3><p class="product-spec">Research Compound</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/melanotan2.jpg" alt="MT-2"></div><div class="product-info"><h3 class="product-name">Melanotan 2</h3><p class="product-spec">Tanning Peptide</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/motsc.jpg" alt="MOTS-C"></div><div class="product-info"><h3 class="product-name">MOTS-C</h3><p class="product-spec">Mitochondrial Peptide</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/nad.jpg" alt="NAD+"></div><div class="product-info"><h3 class="product-name">NAD+</h3><p class="product-spec">Nicotinamide Adenine Dinucleotide</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/selank.jpg" alt="Selank"></div><div class="product-info"><h3 class="product-name">Selank</h3><p class="product-spec">Nootropic Peptide</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/semax.jpg" alt="Semax"></div><div class="product-info"><h3 class="product-name">Semax</h3><p class="product-spec">Nootropic Peptide</p></div></div>
+<div class="product-card fade-up"><div class="product-image"><img src="images/bacwater.jpg" alt="Bac Water"></div><div class="product-info"><h3 class="product-name">Bac Water</h3><p class="product-spec">Bacteriostatic Water</p></div></div>
 </div></section>
 
 <section class="why-section" id="why">
